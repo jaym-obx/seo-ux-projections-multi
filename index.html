@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SEO Revenue Forecast | OuterBox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --dark-blue:#17212E; --obx-blue:#1D4E89; --deep-blue:#033F63; --frost:#EEF3F6;
+    --white:#FFFFFF; --orange:#C75300; --gold:#FFB703; --slate:#5C6C80; --grey:#747D85;
+    --sans:'Roboto',Helvetica,Arial,'Open Sans',sans-serif;
+    --maxw:1120px; --radius:6px; --hair:1px solid #DCE4EB;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--sans);color:var(--dark-blue);background:var(--white);
+    font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--orange);margin:0 0 .65rem;display:inline-flex;align-items:center;gap:.55rem}
+  .eyebrow::before{content:"";width:9px;height:9px;background:var(--orange);display:inline-block;flex:0 0 auto}
+  h2.section-title{font-size:clamp(1.35rem,2.6vw,1.9rem);font-weight:900;color:var(--obx-blue);
+    margin:0 0 .4rem;line-height:1.12;letter-spacing:-.01em}
+  .section-lede{color:var(--slate);max-width:760px;margin:0 0 2rem;font-size:1.02rem}
+  section{padding:74px 0;border-top:var(--hair)}
+  section:first-of-type{border-top:0}
+  .statband{background:var(--frost)}
+
+  header.masthead{background:var(--dark-blue);color:var(--white)}
+  .masthead-inner{display:flex;align-items:center;justify-content:space-between;
+    padding:20px 28px;max-width:var(--maxw);margin:0 auto;gap:18px;flex-wrap:wrap}
+  .wordmark{font-weight:900;font-size:1.35rem;letter-spacing:.02em;color:var(--white);
+    display:flex;align-items:baseline;gap:.05em}
+  .wordmark b{color:var(--gold)}
+  .masthead-meta{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--frost);font-weight:500}
+
+  .hero{background:linear-gradient(180deg,#0F1620 0%, var(--dark-blue) 100%);color:var(--white);padding-bottom:0}
+  .hero .wrap{padding-top:5px;padding-bottom:0}
+  .hero .eyebrow{color:var(--gold)}
+  .hero .eyebrow::before{background:var(--gold)}
+  .hero h1{font-size:clamp(2rem,4.8vw,3.35rem);font-weight:900;line-height:1.05;
+    letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+  .hero p.deck{color:var(--frost);font-size:1.12rem;max-width:60ch;margin:0;font-weight:400}
+  .hero p.deck strong{color:var(--white);font-weight:700}
+  .hero p.deck strong.accent{color:var(--gold)}
+  .findings-text{color:var(--slate);font-size:1.15rem;line-height:1.6;max-width:72ch;margin:0}
+  .findings-text strong{color:var(--dark-blue);font-weight:700}
+  .findings-text strong.accent{color:var(--orange)}
+  .tabs{display:flex;justify-content:center;gap:6px;margin:18px 0 0}
+  .tab{background:transparent;border:1px solid rgba(238,243,246,.35);border-bottom:0;color:var(--frost);
+    font:700 .82rem var(--sans);letter-spacing:.03em;padding:11px 22px;border-radius:7px 7px 0 0;cursor:pointer}
+  .tab:hover{background:rgba(255,255,255,.09)}
+  .tab.active{background:var(--white);color:var(--obx-blue);border-color:var(--white)}
+  .seo-pagebar{padding-top:48px}
+  .seo-pagebar .wrap{padding-top:0;padding-bottom:0}
+  .seo-pagebar + section{padding-top:30px;border-top:0}
+  .pagebtns{display:flex;gap:10px;flex-wrap:wrap}
+  .pagebtn{flex:1 1 0;min-width:150px;background:var(--frost);border:1px solid #CBD5DE;color:var(--slate);
+    font:800 .92rem var(--sans);letter-spacing:.02em;padding:15px 18px;border-radius:9px;cursor:pointer;transition:background .15s,border-color .15s,color .15s,box-shadow .15s}
+  .pagebtn:hover{border-color:var(--obx-blue);color:var(--obx-blue)}
+  .pagebtn.active{background:var(--obx-blue);border-color:var(--obx-blue);color:#fff;box-shadow:0 4px 14px rgba(29,78,137,.28)}
+  body[data-tab="ux"] [data-tab="seo"]{display:none !important}
+  body[data-tab="seo"] [data-tab="ux"]{display:none !important}
+  .editor select{font:400 .95rem var(--sans);color:var(--dark-blue);padding:9px 11px;border:1px solid #CBD5DE;border-radius:5px;background:#fff;width:100%}
+  .editor select:focus{outline:2px solid var(--obx-blue);border-color:var(--obx-blue)}
+
+  .chart-card{background:var(--white);border-radius:var(--radius);padding:26px 26px 18px;
+    border:var(--hair);box-shadow:0 10px 30px rgba(23,33,46,.10)}
+  .chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+  .chart-title{font-weight:700;font-size:1rem;color:var(--dark-blue)}
+  .chart-sub{font-size:.82rem;color:var(--slate)}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.8rem;color:var(--slate)}
+  .legend span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+  .swatch{width:22px;height:0;border-top-width:3px;border-top-style:solid;display:inline-block}
+  .swatch.fill{height:12px;border:0;border-radius:2px}
+  figure.chart{margin:0}
+  figure.chart svg{width:100%;height:auto;display:block}
+  .month-key{display:flex;justify-content:space-between;gap:2px;margin-top:8px;
+    padding:10px 2.6% 0 7.4%;border-top:1px solid #E2E9EF}
+  .month-key span{display:flex;flex-direction:column;align-items:center;line-height:1.15;
+    font-size:20px;color:var(--slate);text-align:center}
+  .month-key span b{font-size:13px;font-weight:700;color:var(--grey);letter-spacing:.02em}
+  .month-key span em{font-style:normal;font-weight:700;color:var(--dark-blue)}
+  .month-key-label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--slate);margin:14px 0 -2px;text-align:left}
+
+  .range-compact{padding-top:50px;padding-bottom:50px}
+  .range-wrap{background:var(--white);border:var(--hair);border-radius:var(--radius);padding:22px 34px 18px}
+  .range-figures{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:16px}
+  .range-fig{text-align:center}
+  .range-fig .lbl{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+  .range-fig .amt{font-size:2.4rem;font-weight:900;margin-top:.3rem}
+  .range-fig.low .amt{color:var(--grey)}
+  .range-fig.target .amt{color:var(--obx-blue)}
+  .range-fig.high .amt{color:var(--orange)}
+  .range-fig .note{font-size:.76rem;color:var(--slate);margin-top:.2rem}
+  .range-figures.two{grid-template-columns:repeat(2,1fr)}
+  .range-figures.three{grid-template-columns:repeat(3,1fr)}
+  .budget-slider{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:5px;background:#DCE4EB;outline:none;margin:6px 0 24px}
+  .budget-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--obx-blue);border:3px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.28);cursor:pointer}
+  .budget-slider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--obx-blue);border:3px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.28);cursor:pointer}
+  .budget-slider:focus{outline:none}
+  .budget-slider-wrap{position:relative}
+  .budget-target-marker{position:absolute;top:-8px;height:36px;border-left:2px dashed var(--dark-blue);transform:translateX(-1px);pointer-events:none;z-index:3}
+  .budget-target-marker span{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--dark-blue);color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:3px;white-space:nowrap}
+
+  .table-scroll{overflow-x:auto;border:var(--hair);border-radius:var(--radius)}
+  table.monthly{border-collapse:collapse;width:100%;font-size:1.2rem;min-width:760px}
+  table.monthly thead th{background:var(--deep-blue);color:var(--white);font-weight:700;text-align:right;
+    padding:12px 14px;font-size:.78rem;letter-spacing:.03em;white-space:nowrap}
+  table.monthly thead th:first-child{text-align:left}
+  table.monthly tbody td{padding:11px 14px;text-align:right;border-top:var(--hair);color:var(--dark-blue);font-variant-numeric:tabular-nums}
+  table.monthly tbody td:first-child{text-align:left;font-weight:700;color:var(--slate)}
+  table.monthly tbody tr:nth-child(even){background:var(--frost)}
+  table.monthly td.hl,table.monthly th.hl{font-weight:700}
+  table.monthly tfoot td{padding:12px 14px;text-align:right;font-weight:900;color:var(--obx-blue);
+    border-top:2px solid var(--obx-blue);font-variant-numeric:tabular-nums;background:var(--white)}
+  table.monthly tfoot td:first-child{text-align:left;color:var(--dark-blue)}
+
+  .method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:38px}
+  .method{border:var(--hair);border-left:4px solid var(--orange);border-radius:var(--radius);padding:18px;background:var(--white)}
+  .method .mk{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+  .method .mv{font-size:1.5rem;font-weight:900;color:var(--obx-blue);line-height:1;margin:.35rem 0 .4rem}
+  .method .mn{font-size:.82rem;color:var(--slate)}
+  .method-cols{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+  .method-cols h3{font-size:.95rem;font-weight:700;color:var(--dark-blue);margin:0 0 .8rem}
+  .assump{margin:0;padding:0;list-style:none}
+  .assump li{position:relative;padding-left:20px;margin-bottom:.7rem;color:var(--slate);font-size:.94rem}
+  .assump li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;background:var(--orange)}
+  .assump li b{color:var(--dark-blue);font-weight:700}
+  .ctr-table{width:100%;border-collapse:collapse;font-size:.82rem}
+  .ctr-table td{padding:6px 8px;border-top:var(--hair);text-align:right;font-variant-numeric:tabular-nums}
+  .ctr-table td:first-child{text-align:left;color:var(--slate)}
+  .ctr-bar-cell{width:46%}
+  .ctr-bar{height:9px;background:var(--obx-blue);border-radius:2px}
+  .sources{font-size:.76rem;color:var(--grey);margin-top:1rem;line-height:1.5}
+
+  footer{background:var(--dark-blue);color:var(--frost);padding:40px 0 46px}
+  footer .wrap{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;align-items:flex-end}
+  footer .wordmark{font-size:1.15rem}
+  .disclaimer{font-size:.78rem;color:var(--grey);max-width:60ch;line-height:1.55}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  .calc-accordion>summary{list-style:none;cursor:pointer;position:relative;padding-right:44px}
+  .calc-accordion>summary::-webkit-details-marker{display:none}
+  .calc-accordion>summary::after{content:"";position:absolute;right:8px;top:4px;width:13px;height:13px;border-right:3px solid var(--orange);border-bottom:3px solid var(--orange);transform:rotate(45deg);transition:transform .2s}
+  .calc-accordion[open]>summary::after{transform:rotate(-135deg)}
+  .calc-accordion>summary h2.section-title{margin-bottom:0}
+  .calc-accordion>summary:hover .section-title{color:var(--orange)}
+  .calc-body{padding-top:1.5rem}
+  /* ---- live editor ---- */
+  .editor-toggle{position:fixed;right:18px;bottom:18px;z-index:60;background:var(--obx-blue);color:#fff;
+    border:0;border-radius:999px;padding:12px 20px;font:700 .85rem var(--sans);cursor:pointer;
+    box-shadow:0 6px 20px rgba(0,0,0,.28)}
+  .editor-toggle:hover{background:#163f6f}
+  .editor{display:none;background:var(--frost);border-top:3px solid var(--orange)}
+  .editor.open{display:block}
+  .editor .wrap{padding:44px 28px 90px}
+  .ed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px}
+  .ed-field label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--slate);margin-bottom:6px}
+  .ed-field input{width:100%}
+  .editor input{font:400 .95rem var(--sans);color:var(--dark-blue);
+    padding:9px 11px;border:1px solid #CBD5DE;border-radius:5px;background:#fff}
+  .editor input:focus{outline:2px solid var(--obx-blue);border-color:var(--obx-blue)}
+  .ed-h3{font-size:.95rem;font-weight:700;color:var(--dark-blue);margin:26px 0 10px}
+  .ed-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .ed-group{background:#fff;border:var(--hair);border-top:3px solid var(--obx-blue);border-radius:var(--radius);padding:16px 16px 6px}
+  .ed-group.rk{border-top-color:var(--orange)}
+  .ed-group.nt{border-top-color:var(--gold)}
+  .ed-group h4{margin:0 0 12px;font-size:.82rem;font-weight:700;color:var(--dark-blue);line-height:1.3}
+  .ed-group label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--slate);margin-bottom:12px}
+  .ed-group label input{width:100%;margin-top:5px}
+  .ed-table-wrap{overflow-x:auto;border:var(--hair);border-radius:var(--radius);background:#fff}
+  table.ed-table{border-collapse:collapse;width:100%;min-width:460px;font-size:.9rem}
+  table.ed-table th{background:var(--deep-blue);color:#fff;font-weight:700;text-align:left;padding:9px 10px;font-size:.76rem}
+  table.ed-table td{padding:5px 8px;border-top:var(--hair);vertical-align:middle}
+  table.ed-table input{width:100%}
+  table.ed-table .e-month{min-width:70px}
+  table.ed-table .e-seas{font-variant-numeric:tabular-nums;color:var(--slate);font-weight:700;font-size:.85rem}
+  .e-del{border:0;background:#F2D8CC;color:var(--orange);font-weight:900;border-radius:5px;
+    width:28px;height:28px;cursor:pointer;line-height:1}
+  .ed-add{margin-top:10px;border:1px dashed var(--obx-blue);background:#fff;color:var(--obx-blue);
+    font:700 .85rem var(--sans);padding:8px 14px;border-radius:5px;cursor:pointer}
+  .ed-ctr{width:100%;max-width:760px}
+  .ed-note{font-size:.82rem;color:var(--slate);margin:8px 0 0;max-width:760px}
+  .ed-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .ed-actions button{font:700 .85rem var(--sans);padding:11px 16px;border-radius:5px;cursor:pointer;border:1px solid transparent}
+  .ed-actions #ed-apply{background:var(--obx-blue);color:#fff}
+  .ed-actions #ed-link,.ed-actions #ed-json,.ed-actions #ed-download,.ed-actions #ed-pdf{background:#fff;color:var(--obx-blue);border-color:#CBD5DE}
+  .ed-actions #ed-reset{background:transparent;color:var(--grey);border-color:#CBD5DE}
+  .ed-status{margin-top:14px;font-size:.85rem;font-weight:700;color:var(--obx-blue);min-height:1.2em}
+
+  .ed-accordion{margin-top:26px;border:var(--hair);border-radius:var(--radius);background:#fff}
+  .ed-accordion>summary{cursor:pointer;padding:14px 16px;font-weight:700;color:var(--dark-blue);font-size:.95rem;list-style:none}
+  .ed-accordion>summary::-webkit-details-marker{display:none}
+  .ed-accordion>summary::before{content:"\25B8  ";color:var(--orange);font-weight:900}
+  .ed-accordion[open]>summary::before{content:"\25BE  "}
+  .ed-accordion .acc-body{padding:0 16px 18px}
+  .ed-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:6px 0 12px}
+  .ed-key{background:var(--frost);border-radius:var(--radius);padding:12px}
+  .ed-key h5{margin:0 0 8px;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+  .ed-key .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .ed-key label{font-size:.6rem;font-weight:700;color:var(--slate);text-transform:uppercase}
+  .ed-key input{width:100%;margin-top:3px}
+  .ed-kd{margin-bottom:12px}
+  .ed-kd label{font-size:.7rem;font-weight:700;color:var(--slate);text-transform:uppercase}
+  .ed-kd input{width:64px;margin:0 4px}
+  .ed-paste{width:100%;min-height:70px;font:400 .82rem var(--sans);padding:9px 11px;border:1px solid #CBD5DE;border-radius:5px}
+  .kw-table-wrap{overflow:auto;max-height:360px;border:var(--hair);border-radius:var(--radius);margin-top:10px}
+  table.kw-table{border-collapse:collapse;width:100%;min-width:660px;font-size:.84rem}
+  table.kw-table th{position:sticky;top:0;background:var(--deep-blue);color:#fff;font-weight:700;text-align:right;padding:8px 9px;font-size:.72rem;z-index:1}
+  table.kw-table th:first-child{text-align:left}
+  table.kw-table td{padding:3px 6px;border-top:var(--hair);text-align:right}
+  table.kw-table td:first-child{text-align:left}
+  table.kw-table input{width:100%;padding:5px 6px;font-size:.82rem}
+  table.kw-table .kw-kw input{min-width:150px;text-align:left}
+  table.kw-table .calc{color:var(--slate);font-variant-numeric:tabular-nums;font-weight:700}
+  table.kw-table tfoot td{position:sticky;bottom:0;background:#fff;border-top:2px solid var(--obx-blue);font-weight:900;color:var(--obx-blue)}
+  .kw-note{font-size:.8rem;color:var(--slate);margin:2px 0 10px}
+  .kw-head{margin:0;padding:14px 16px 2px;font-size:.95rem;font-weight:700;color:var(--dark-blue)}
+  .kw-btns{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+  @media (max-width:900px){
+    .method-grid{grid-template-columns:repeat(2,1fr)}
+    .method-cols{grid-template-columns:1fr}
+    .ed-grid,.ed-groups,.ed-keys{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    .range-figures{grid-template-columns:1fr}
+    .method-grid{grid-template-columns:1fr}
+    section{padding:52px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .draw{stroke-dasharray:none!important;stroke-dashoffset:0!important}
+  }
+  @media print{
+    @page{margin:14mm}
+    body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .editor,.editor-toggle,.tabs,.seo-pagebar{display:none !important}
+    .reveal{opacity:1 !important;transform:none !important}
+    .draw{stroke-dashoffset:0 !important;animation:none !important}
+    details:not([open]) > *:not(summary){display:block !important}
+    .chart-card,.range-wrap,.method,.table-scroll{break-inside:avoid}
+  }
+</style>
+</head>
+<body data-tab="seo">
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="wordmark">Outer<b>Box</b></div>
+    <div class="masthead-meta" id="mast-meta">SEO Revenue Forecast</div>
+  </div>
+</header>
+
+<section class="hero" style="border-top:0">
+  <div class="wrap">
+    <p class="eyebrow" id="hero-eyebrow">Prepared for ispolitical.com</p>
+    <h1><span id="h-client">ISPolitical</span> <span id="h-window">12</span>-Month <span id="h-disc">SEO</span> Projections</h1>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab-btn="seo" role="tab">SEO Estimates</button>
+      <button class="tab" data-tab-btn="ux" role="tab">UX Estimates</button>
+    </div>
+  </div>
+</section>
+
+<div class="seo-pagebar" data-tab="seo">
+  <div class="wrap">
+    <div class="pagebtns" role="tablist">
+      <button class="pagebtn active" data-seo-page="target" role="tab">Target Estimate</button>
+      <button class="pagebtn" data-seo-page="high" role="tab">High Estimate</button>
+      <button class="pagebtn" data-seo-page="low" role="tab">Low Estimate</button>
+    </div>
+  </div>
+</div>
+
+<section class="range-compact" data-tab="seo">
+  <div class="wrap">
+    <p class="eyebrow">Projected Revenue Increase</p>
+    <h2 class="section-title" id="range-title">Target, High &amp; Low Avg. Monthly Increase</h2>
+    <p class="section-lede" id="range-lede">Projected monthly organic run rate after the forecast window.</p>
+    <div class="range-wrap reveal" style="margin-top:18px">
+      <div class="budget-slider-wrap">
+        <input type="range" id="budget-slider" class="budget-slider" step="1000" aria-label="Monthly budget" />
+        <div class="budget-target-marker" id="budget-marker"><span>Target</span></div>
+      </div>
+      <div class="range-figures three">
+        <div class="range-fig target"><div class="lbl">Monthly budget</div><div class="amt" id="b-budget">$0</div></div>
+        <div class="range-fig high"><div class="lbl">Projected monthly return</div><div class="amt" id="b-target">+$0</div></div>
+        <div class="range-fig low"><div class="lbl">Transactions / Leads</div><div class="amt" id="b-leads">0</div></div>
+      </div>
+    </div>
+    <div class="range-wrap reveal" style="margin-top:18px">
+      <div class="range-figures two">
+        <div class="range-fig target"><div class="lbl">Average Monthly Revenue</div><div class="amt" id="b-avgrev">$0</div></div>
+        <div class="range-fig high"><div class="lbl">Percentage Increase</div><div class="amt" id="b-pctinc">+0%</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="statband" data-tab="seo">
+  <div class="wrap">
+    <p class="eyebrow">Projected Monthly Revenue</p>
+    <h2 class="section-title">Estimated Monthly Progression</h2>
+    <p class="section-lede">Seasonality-adjusted monthly organic revenue across the engagement. The shaded band is the incremental revenue the work generates each month.</p>
+    <div class="chart-card reveal">
+      <div class="chart-head">
+        <div>
+          <div class="chart-title">Projected monthly organic revenue</div>
+          <div class="chart-sub">Seasonality-adjusted · with vs. without SEO work</div>
+        </div>
+        <div class="legend">
+          <span><i class="swatch" style="border-top-color:var(--obx-blue)"></i>With SEO</span>
+          <span><i class="swatch" style="border-top-color:var(--slate);border-top-style:dashed"></i>Without SEO</span>
+          <span><i class="swatch fill" style="background:rgba(199,83,0,.18)"></i>Incremental gain</span>
+        </div>
+      </div>
+      <figure class="chart" id="hero-chart" role="img" aria-label="Projected monthly organic revenue with versus without SEO."></figure>
+      <div class="month-key-label">Timeline · Month 1 → 12</div>
+      <div class="month-key" id="month-key"></div>
+    </div>
+  </div>
+</section>
+
+<section data-tab="seo">
+  <div class="wrap">
+    <p class="eyebrow">Month by Month</p>
+    <h2 class="section-title">Monthly Sessions, Transactions/Leads &amp; Revenue</h2>
+    <p class="section-lede">Leads and revenue build as optimization ramps in and are shaped by each month's seasonality.</p>
+    <div class="table-scroll reveal">
+      <table class="monthly" id="monthly-table">
+        <thead>
+          <tr><th>Month</th><th>Sessions</th><th>Transactions/Leads</th><th class="hl">Revenue (with SEO)</th><th>Revenue (baseline)</th><th class="hl">Monthly gain</th></tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="findings-section" data-tab="seo">
+  <div class="wrap">
+    <p class="eyebrow">Findings</p>
+    <p class="findings-text">
+      The cost of standing still is <strong class="accent" id="d-standstill">$112K</strong> in organic revenue. Over the next
+      <span id="d-window">12</span> months, an active SEO program is projected to grow <strong id="d-client">ISPolitical</strong>&rsquo;s organic
+      revenue to <strong id="d-total">$261,914</strong> &mdash; against <strong id="d-base">$149,760</strong> if nothing changes.
+    </p>
+  </div>
+</section>
+
+<section class="statband" data-tab="seo">
+  <div class="wrap">
+    <details class="calc-accordion">
+      <summary>
+        <p class="eyebrow">How This Is Calculated</p>
+        <h2 class="section-title">Grounded in real click-through data</h2>
+      </summary>
+      <div class="calc-body">
+    <p class="section-lede">Projections are built from current performance plus the estimated value of re-ranking existing terms and earning new ones, ramped in over the year and shaped by seasonality.</p>
+    <div class="method-grid">
+      <div class="method"><div class="mk">Organic conversion rate</div><div class="mv" id="m-cvr">6.0%</div><div class="mn">Sessions to leads</div></div>
+      <div class="method"><div class="mk">Average lead value</div><div class="mv" id="m-lead">$500</div><div class="mn">Per converted lead</div></div>
+      <div class="method"><div class="mk">Forecast window</div><div class="mv" id="m-window">12 mo</div><div class="mn">Ramp to steady state</div></div>
+      <div class="method"><div class="mk">Ranking data</div><div class="mv">Ahrefs</div><div class="mn">Positions &amp; volume</div></div>
+    </div>
+    <div class="method-cols">
+      <div>
+        <h3>What goes into the model</h3>
+        <ul class="assump">
+          <li><b>Current performance:</b> the trailing-12-month average sessions, leads, and revenue — the no-change baseline.</li>
+          <li><b>Post-optimization keyword value:</b> the added sessions, leads, and revenue from the keyword targets — both moving already-ranked terms up and earning new rankings — summed from the keyword table.</li>
+          <li><b>Ramp &amp; seasonality:</b> optimization value phases in linearly from 1% in month 1 to 100% in the final month, then each month is scaled by its share of annual organic traffic.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Organic CTR by position</h3>
+        <table class="ctr-table" id="ctr-table"><tbody></tbody></table>
+        <p class="sources">Click-through rates sourced from Advanced Web Ranking, Smart Insights, Backlinko, and First Page Sage industry studies, blended to the position benchmarks used across OuterBox forecasts.</p>
+      </div>
+    </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+
+<button class="editor-toggle" id="editor-toggle" aria-expanded="false">✎ Edit data</button>
+
+<section class="range-compact" data-tab="ux">
+  <div class="wrap">
+    <p class="eyebrow">UX / CRO Forecast</p>
+    <h2 class="section-title">Projected Annual Donation Lift</h2>
+    <p class="section-lede" id="ux-lede">Recommended scenario, compounded across a 12-month testing program.</p>
+    <div class="range-wrap reveal">
+      <div class="range-figures three">
+        <div class="range-fig target"><div class="lbl">Additional annual funds</div><div class="amt" id="ux-annual">+$0</div><div class="note" id="ux-scenario-note">Expected scenario</div></div>
+        <div class="range-fig high"><div class="lbl">Mission impact multiplier</div><div class="amt" id="ux-mission">0&times;</div><div class="note">Annual funds &divide; investment</div></div>
+        <div class="range-fig low"><div class="lbl">Payback</div><div class="amt" id="ux-payback">0</div><div class="note">months</div></div>
+      </div>
+      <p style="text-align:center;margin:18px 0 0;color:var(--slate);font-size:.95rem">Net additional funds after the UX investment: <strong id="ux-net" style="color:var(--obx-blue)">+$0</strong></p>
+    </div>
+  </div>
+</section>
+
+<section data-tab="ux">
+  <div class="wrap">
+    <p class="eyebrow">Scenarios</p>
+    <h2 class="section-title">Conservative, Expected &amp; Aggressive</h2>
+    <p class="section-lede">Twelve months of compounding donation conversion-rate gains from an iterative testing program. Expected is the recommended planning case.</p>
+    <div class="table-scroll reveal">
+      <table class="monthly" id="ux-table">
+        <thead><tr><th>Metric</th><th>Conservative</th><th>Expected</th><th>Aggressive</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="statband" data-tab="ux">
+  <div class="wrap">
+    <details class="calc-accordion">
+      <summary>
+        <p class="eyebrow">How This Is Calculated</p>
+        <h2 class="section-title">Compounding test-program model</h2>
+      </summary>
+      <div class="calc-body">
+        <p class="section-lede">Each winning A/B test lifts the donation conversion rate; wins compound across the year.</p>
+        <div class="method-cols">
+          <div>
+            <h3>The model</h3>
+            <ul class="assump">
+              <li><b>Effective lift per test</b> = average lift of a winning test &times; win rate.</li>
+              <li><b>Compounding factor</b> = (1 + effective lift) raised to the number of tests per year.</li>
+              <li><b>Projected donation CR</b> = current rate &times; compounding factor; donors and funds raised scale the same way.</li>
+              <li><b>Mission impact</b> = additional annual funds &divide; total UX investment; <b>payback</b> = investment &divide; additional monthly funds.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Basis &amp; disclaimers</h3>
+            <ul class="assump">
+              <li>Win-rate and lift benchmarks from 95+ live experiments across 30+ accounts (Convert.com / CXL industry ranges of 20&ndash;30% win rate).</li>
+              <li>Projections assume baseline traffic and average gift value hold constant.</li>
+              <li>Non-profit donation behavior varies from e-commerce; results depend on traffic quality, donor intent, and seasonality. Forecasts are estimates, not guarantees.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><div class="wordmark">Outer<b>Box</b></div></div>
+    <p class="disclaimer">Projections are estimates based on current ranking data, historical organic traffic, and industry click-through benchmarks. Actual results depend on execution, competitive activity, and search algorithm changes, and are not guaranteed. Prepared for <span id="f-client">ISPolitical (ispolitical.com)</span>.</p>
+  </div>
+</footer>
+
+<section class="editor" id="editor">
+  <div class="wrap">
+    <p class="eyebrow">Live Editor</p>
+    <h2 class="section-title">Edit forecast data</h2>
+    <p class="section-lede">Changes preview live and auto-save to this browser. Use <b>Copy shareable link</b> to bookmark or send a specific client's forecast, or <b>Download standalone HTML</b> to commit a fixed version to your repo.</p>
+
+    <div data-tab="seo">
+    <div class="ed-grid" id="ed-fields"></div>
+
+    <h3 class="ed-h3">Model inputs — monthly averages</h3>
+    <div class="ed-groups" id="ed-groups"></div>
+
+    <div class="ed-accordion" id="kw-accordion">
+      <h3 class="kw-head">New keyword targets — paste &amp; auto-calculate</h3>
+      <div class="acc-body">
+        <p class="kw-note">Paste keywords from the New Targets or Keyword Opps tabs (Keyword, Current Position, Search Volume, KD). Estimated traffic is the optimized-traffic formula: Search Volume &times; the Position Key matched to each keyword&rsquo;s current position (4&ndash;10, 11&ndash;20, or 21&ndash;30) and KD tier. A position of 0 is treated as a brand-new target and uses the 11&ndash;20 key. Transactions and revenue then apply your CVR and lead value. When this table has rows, its totals populate the Post-Optimization &middot; Ranked Keywords group above; that group stays at zero until you add keyword targets.</p>
+        <div class="ed-keys">
+          <div class="ed-key"><h5>Position Key (4&ndash;10)</h5><div class="row" id="key410"></div></div>
+          <div class="ed-key"><h5>Position Key (11&ndash;20 &amp; new)</h5><div class="row" id="key1120"></div></div>
+          <div class="ed-key"><h5>Position Key (21&ndash;30)</h5><div class="row" id="key2130"></div></div>
+        </div>
+        <div class="ed-kd"><label>KD tiers &nbsp; low &le; <input id="kd0" type="number" step="any"> &nbsp; mid &le; <input id="kd1" type="number" step="any"> &nbsp; else high</label></div>
+        <textarea class="ed-paste" id="kw-paste" placeholder="Paste rows here: Keyword [tab] Current Position [tab] Search Volume [tab] KD  — one keyword per line, up to 500. Tab- or comma-separated."></textarea>
+        <div class="kw-btns">
+          <button id="kw-load" class="ed-add">Load pasted rows</button>
+          <button id="kw-add" class="ed-add">+ Add row</button>
+          <button id="kw-clear" class="ed-add">Clear all</button>
+        </div>
+        <div class="kw-table-wrap">
+          <table class="kw-table" id="kw-table">
+            <thead><tr><th>Target keyword</th><th>Pos</th><th>Vol</th><th>KD</th><th>Est. traffic</th><th>Est. trans</th><th>Est. revenue</th><th></th></tr></thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ed-h3">Monthly sessions (last 12 months)</h3>
+    <div class="ed-table-wrap">
+      <table class="ed-table" id="ed-table">
+        <thead><tr><th>Month</th><th>Sessions</th><th>Seasonality</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <button class="ed-add" id="ed-add">+ Add month</button>
+    <p class="ed-note">Seasonality is calculated automatically: each month's sessions divided by the 12-month average. Optimization value ramps linearly from 1% in month 1 to 100% in the final month.</p>
+
+    <h3 class="ed-h3">Organic CTR by position (%, comma-separated)</h3>
+    <input class="ed-ctr" id="ed-ctr" type="text" />
+    </div>
+
+    <div data-tab="ux">
+      <div class="ed-grid" id="ux-fields"></div>
+      <h3 class="ed-h3">Test scenarios</h3>
+      <div class="ed-keys" id="ux-scenarios"></div>
+      <p class="ed-note">Effective lift per test = avg lift &times; win rate. Compounding factor = (1 + effective lift) ^ tests per year, applied to your current donation conversion rate.</p>
+    </div>
+
+    <div class="ed-actions">
+      <button id="ed-apply">Apply</button>
+      <button id="ed-link">Copy shareable link</button>
+      <button id="ed-json">Copy config JSON</button>
+      <button id="ed-download">Download standalone HTML</button>
+      <button id="ed-pdf">Save as PDF</button>
+      <button id="ed-reset">Clear fields</button>
+    </div>
+    <p class="ed-status" id="ed-status" aria-live="polite"></p>
+  </div>
+</section>
+
+<script>
+/* =============================================================================
+   DEFAULT DATA — the fallback forecast. Only these fields are inputs; every
+   projected number (sessions, leads, revenue, baseline, totals, range) derives.
+   Model:
+     seasonality_i = monthlySessions_i / avg(monthlySessions)
+     ramp_i        = 1% in month 1 -> 100% in the final month (linear)
+     sessions_i    = (current.sessions + ranked.sessions*ramp_i) * seasonality_i
+     leads_i       = (current.leads + ranked.leads*ramp_i) * seasonality_i
+     revenue_i     = (current.revenue + ranked.revenue*ramp_i) * seasonality_i
+   ranked.* is the sum of the keyword table totals (0 until keyword targets are added).
+     baseline_i    = current.revenue * seasonality_i   (no change)
+   ============================================================================= */
+const DEFAULT_DATA = {
+  client: "ISPolitical",
+  domain: "ispolitical.com",
+  cvr: 0.06,
+  leadValue: 500,
+  current:    { sessions: 416, leads: 25, revenue: 12480 },
+  ranked:     { sessions: 0, leads: 0, revenue: 0 },
+  months: ["Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct"],
+  monthlySessions: [373,470,424,353,402,412,394,478,479,478,385,345],
+  techLift: 0,
+  monthlyBudget: 5000,
+  budgetMin: 1000,
+  budgetMax: 9000,
+  ctrByPosition: [17.98,11.15,7.10,4.67,3.16,2.30,1.79,1.36,1.09,0.94],
+  keywords: {
+    positionKey410: [12.07, 6.88, 5.15],
+    positionKey1120: [4.50, 2.19, 1.06],
+    positionKey2130: [1.06, 0.87, 0.84],
+    kdBreaks: [30, 60],
+    rows: []
+  }
+};
+
+const UX_DEFAULT_DATA = {
+  client: "Save the Children",
+  domain: "savethechildren.org",
+  monthlyVisitors: 500000,
+  reachPct: 0.08,
+  dcr: 0.025,
+  giftValue: 65,
+  monthlyRetainer: 20000,
+  engagementMonths: 12,
+  recommended: "expected",
+  scenarios: {
+    conservative: { lift: 3, winRate: 20, tests: 18 },
+    expected:     { lift: 6, winRate: 25, tests: 24 },
+    aggressive:   { lift: 12, winRate: 30, tests: 30 }
+  }
+};
+const STORAGE_KEY_UX = "obxUxForecastV1";
+let uxRaw, UXD;
+const cap = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : s;
+
+const STORAGE_KEY = "obxSeoForecastV2";
+const STORAGE_KEY_SEO3 = "obxSeo3PagesV1";
+
+/* ---- formatters ---------------------------------------------------------- */
+const usd  = n => "$" + Math.round(n).toLocaleString("en-US");
+const plusUsd = n => (n<0?"-$":"+$") + Math.round(Math.abs(n)).toLocaleString("en-US");
+const usd2 = n => "$" + (Number(n)||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const num  = n => Math.round(n).toLocaleString("en-US");
+const pct1 = f => (f*100).toFixed(1) + "%";
+const shortUsd = n => { const a=Math.abs(n);
+  return a>=1e6 ? "$"+(n/1e6).toFixed(a>=1e7?0:1).replace(/\.0$/,"")+"M" : "$"+Math.round(n/1000)+"K"; };
+const compactUsd = n => { const a=Math.abs(n);
+  if(a>=10000) return "$"+Math.round(n/1000)+"k";
+  if(a>=1000) return "$"+(n/1000).toFixed(1).replace(/\.0$/,"")+"k";
+  return "$"+Math.round(n); };
+
+/* ---- state + derivation -------------------------------------------------- */
+let DATA;
+let currentRaw;
+const SEO_LABELS = { target:"Target Estimate", high:"High Estimate", low:"Low Estimate" };
+let seoActive = "target";
+let seoData = {};
+const SEO3_DEFAULT = null;
+const sum = a => a.reduce((s,v)=>s+(Number(v)||0),0);
+
+function keywordCTR(kw, cfg){
+  const kd = Number(kw.kd)||0, pos = Number(kw.pos)||0;
+  const t = cfg.kdBreaks || [30,60];
+  const tier = kd<=t[0] ? 0 : (kd<=t[1] ? 1 : 2);
+  let key;
+  if(pos>=4 && pos<=10) key = cfg.positionKey410;
+  else if(pos>=11 && pos<=20) key = cfg.positionKey1120;
+  else if(pos>=21 && pos<=30) key = cfg.positionKey2130 || cfg.positionKey1120;
+  else if(pos>=1 && pos<=3) key = cfg.positionKey410;
+  else key = cfg.positionKey1120; // position 0 / blank / >30 -> new-target treatment
+  return (Number(key[tier])||0)/100;
+}
+function computeDerived(raw){
+  const d = JSON.parse(JSON.stringify(raw));
+  const N = d.months.length;
+  const ms = d.monthlySessions.map(v=>Number(v)||0);
+  const avg = ms.length ? sum(ms)/ms.length : 0;
+  d.seasonality = ms.map(v => avg>0 ? v/avg : 0);
+  d.ramp = d.months.map((_,i)=> N>1 ? 0.01 + i*(0.99/(N-1)) : 1);
+  const c=d.current;
+  d.cvr = (d.cvr!=null && d.cvr!=="") ? Number(d.cvr) : (c.sessions>0 ? c.leads/c.sessions : 0);
+  d.leadValue = (d.leadValue!=null && d.leadValue!=="") ? Number(d.leadValue) : (c.leads>0 ? c.revenue/c.leads : 0);
+
+  // New keyword targets -> per-row traffic/transactions/revenue, then group totals
+  d.keywords = d.keywords || {positionKey410:[12.07,6.88,5.15],positionKey1120:[4.50,2.19,1.06],positionKey2130:[1.06,0.87,0.84],kdBreaks:[30,60],rows:[]};
+  if(!d.keywords.positionKey2130) d.keywords.positionKey2130 = [1.06,0.87,0.84];
+  const krows = (d.keywords.rows||[]).filter(k => (Number(k.sv)||0) > 0);
+  d.keywordCalc = krows.map(k=>{
+    const traffic = Math.round((Number(k.sv)||0) * keywordCTR(k, d.keywords));
+    return { kw:k.kw, pos:Number(k.pos)||0, sv:Number(k.sv)||0, kd:Number(k.kd)||0,
+             traffic, trans:Math.round(traffic*d.cvr), revenue:traffic*d.cvr*d.leadValue };
+  });
+  if(d.keywordCalc.length){
+    const tt = sum(d.keywordCalc.map(x=>x.traffic));
+    d.keywordTotals = { traffic:tt, trans:Math.round(tt*d.cvr), revenue:tt*d.cvr*d.leadValue };
+    d.ranked = { sessions:tt, leads:Math.round(tt*d.cvr), revenue:tt*d.cvr*d.leadValue };
+  } else {
+    d.keywordTotals = { traffic:0, trans:0, revenue:0 };
+    d.ranked = { sessions:0, leads:0, revenue:0 };
+  }
+
+  const r=d.ranked;
+  d.sessions = d.months.map((_,i)=> (c.sessions + r.sessions*d.ramp[i]) * d.seasonality[i]);
+  d.leadsExact = d.months.map((_,i)=> (c.leads + r.leads*d.ramp[i]) * d.seasonality[i]);
+  d.leads = d.leadsExact.map(v=>Math.round(v));
+  d.revenue = d.months.map((_,i)=> (c.revenue + r.revenue*d.ramp[i]) * d.seasonality[i]);
+  d.baseline = d.months.map((_,i)=> c.revenue * d.seasonality[i]);
+  d.gain = d.revenue.map((v,i)=> v - d.baseline[i]);
+  d.totals = { sessions:sum(d.sessions), leads:sum(d.leads),
+               revenue:sum(d.revenue), baseline:sum(d.baseline), gain:sum(d.gain) };
+  const bud=Number(d.monthlyBudget)||0, bmin=Number(d.budgetMin)||0, bmax=Number(d.budgetMax)||0;
+  d.lowBand  = bud>0 ? 0.75*((bud-bmin)/bud) : 0;
+  d.highBand = bud>0 ? 0.50*((bmax-bud)/bud) : 0;
+  d.range = { lowBand:d.lowBand, highBand:d.highBand, target:(r.revenue) };
+  d.range.low  = d.range.target*(1-d.lowBand);
+  d.range.high = d.range.target*(1+d.highBand);
+  d.avgMonthlyRevenue = (c.revenue||0) + (r.revenue||0);
+  d.pctIncrease = c.revenue>0 ? (r.revenue/c.revenue) : 0;
+  return d;
+}
+
+/* ---- copy population ----------------------------------------------------- */
+const setTxt = (id,v)=>{ const el=document.getElementById(id); if(el) el.textContent=v; };
+function populateCopy(){
+  const MN = DATA.months.length;
+  document.title = `SEO Revenue Forecast — ${DATA.client} | OuterBox`;
+  setTxt("h-client", DATA.client);
+  setTxt("h-window", MN);
+  setTxt("d-window", MN);
+  setTxt("hero-eyebrow", "Prepared for " + DATA.domain);
+  setTxt("d-standstill", shortUsd(DATA.totals.gain));
+  setTxt("d-client", DATA.client);
+  setTxt("d-total", usd(DATA.totals.revenue));
+  setTxt("d-base", usd(DATA.totals.baseline));
+  setTxt("m-cvr", pct1(DATA.cvr));
+  setTxt("m-lead", usd(DATA.leadValue));
+  setTxt("m-window", MN + " mo");
+  setTxt("f-client", `${DATA.client} (${DATA.domain})`);
+  setTxt("range-title", (SEO_LABELS[seoActive]||"Estimate") + " — Avg. Monthly Increase");
+  setTxt("range-lede", "Projected additional monthly organic revenue for the "+((SEO_LABELS[seoActive]||"selected").toLowerCase())+". Drag the budget slider to explore scenarios by spend.");
+}
+
+/* ---- charts -------------------------------------------------------------- */
+function buildHeroChart(){
+  const W=1000,H=430,padL=74,padR=26,padT=26,padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const n=DATA.months.length;
+  const dataMax = Math.max(...DATA.revenue, ...DATA.baseline, 1);
+  const niceStep = v => { if(!(v>0)) return 1000;
+    const m=Math.pow(10,Math.floor(Math.log10(v))); const f=v/m;
+    const nf = f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10; return nf*m; };
+  const step = niceStep(dataMax/4) || 1000;
+  const topTick = Math.ceil(dataMax/step)*step;
+  const yMax = topTick*1.16;
+  const ticks=[]; for(let t=0;t<=topTick+1;t+=step) ticks.push(t);
+  const x=i=>padL+(n===1?0:i*(plotW/(n-1)));
+  const y=v=>padT+plotH*(1-v/yMax);
+
+  const ptsSEO  = DATA.revenue.map((v,i)=>[x(i),y(v)]);
+  const ptsBase = DATA.baseline.map((v,i)=>[x(i),y(v)]);
+  const line = p => p.map((d,i)=>(i?"L":"M")+d[0].toFixed(1)+" "+d[1].toFixed(1)).join(" ");
+  const area = line(ptsSEO)+" "+ptsBase.slice().reverse().map(d=>"L"+d[0].toFixed(1)+" "+d[1].toFixed(1)).join(" ")+" Z";
+
+  let grid="";
+  ticks.forEach(t=>{ const yy=y(t).toFixed(1);
+    grid+=`<line x1="${padL}" y1="${yy}" x2="${W-padR}" y2="${yy}" stroke="#E2E9EF" stroke-width="1"/>`;
+    grid+=`<text x="${padL-12}" y="${(+yy+4).toFixed(1)}" text-anchor="end" font-size="20" fill="#5C6C80">$${(t/1000)}k</text>`;
+  });
+  const seoLen=3200;
+  const dots = ptsSEO.map(d=>`<circle cx="${d[0].toFixed(1)}" cy="${d[1].toFixed(1)}" r="3.5" fill="#1D4E89"/>`).join("");
+  const gainLabels = ptsSEO.map((d,i)=>`<text x="${d[0].toFixed(1)}" y="${(d[1]-10).toFixed(1)}" text-anchor="middle" font-size="20" font-weight="700" fill="#1D4E89">+${compactUsd(DATA.gain[i])}</text>`).join("");
+
+  const svg=`
+  <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+    ${grid}
+    <path d="${area}" fill="rgba(199,83,0,.16)"/>
+    <path d="${line(ptsBase)}" fill="none" stroke="#5C6C80" stroke-width="2.5" stroke-dasharray="7 6" stroke-linecap="round"/>
+    <path class="draw" d="${line(ptsSEO)}" fill="none" stroke="#1D4E89" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
+      style="stroke-dasharray:${seoLen};stroke-dashoffset:${seoLen};animation:draw 1.6s .2s ease forwards"/>
+    ${dots}
+    ${gainLabels}
+    <style>@keyframes draw{to{stroke-dashoffset:0}}</style>
+  </svg>`;
+  const fig=document.getElementById("hero-chart");
+  fig.setAttribute("aria-label",
+    `Line chart of projected monthly organic revenue with SEO versus without SEO across ${n} months for ${DATA.client}. The shaded gap totals ${usd(DATA.totals.gain)} in incremental revenue.`);
+  fig.innerHTML=svg;
+}
+
+function buildRangeChart(){
+  if(!document.getElementById("range-chart")) return;
+  const W=1000,H=90,padL=24,padR=24;
+  const plotW=W-padL-padR, cy=40;
+  const min=DATA.range.low*0.9, max=DATA.range.high*1.06;
+  const span=(max-min)||1;
+  const x=v=>padL+plotW*((v-min)/span);
+  const xl=x(DATA.range.low), xt=x(DATA.range.target), xh=x(DATA.range.high);
+  const svg=`
+  <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+    <line x1="${padL}" y1="${cy}" x2="${W-padR}" y2="${cy}" stroke="#E2E9EF" stroke-width="2"/>
+    <rect x="${xl.toFixed(1)}" y="${cy-7}" width="${Math.max(0,xh-xl).toFixed(1)}" height="14" rx="7" fill="url(#rg)"/>
+    <defs><linearGradient id="rg" x1="0" x2="1">
+      <stop offset="0" stop-color="#747D85"/><stop offset=".5" stop-color="#1D4E89"/><stop offset="1" stop-color="#C75300"/>
+    </linearGradient></defs>
+    <line x1="${xl.toFixed(1)}" y1="${cy-15}" x2="${xl.toFixed(1)}" y2="${cy+15}" stroke="#747D85" stroke-width="2"/>
+    <line x1="${xh.toFixed(1)}" y1="${cy-15}" x2="${xh.toFixed(1)}" y2="${cy+15}" stroke="#C75300" stroke-width="2"/>
+    <circle cx="${xt.toFixed(1)}" cy="${cy}" r="10" fill="#1D4E89" stroke="#fff" stroke-width="3"/>
+    <text x="${xl.toFixed(1)}" y="${cy+32}" text-anchor="middle" font-size="14" font-weight="700" fill="#747D85">${usd(DATA.range.low)}</text>
+    <text x="${xt.toFixed(1)}" y="${cy-20}" text-anchor="middle" font-size="15" font-weight="900" fill="#1D4E89">${usd(DATA.range.target)}</text>
+    <text x="${xh.toFixed(1)}" y="${cy+32}" text-anchor="middle" font-size="14" font-weight="700" fill="#C75300">${usd(DATA.range.high)}</text>
+  </svg>`;
+  const rfig=document.getElementById("range-chart");
+  rfig.setAttribute("aria-label",
+    `Range of projected monthly run rate: low ${usd(DATA.range.low)}, target ${usd(DATA.range.target)}, high ${usd(DATA.range.high)}.`);
+  rfig.innerHTML=svg;
+}
+
+function budgetReturn(V){
+  const bud=Number(DATA.monthlyBudget)||0, bmin=Number(DATA.budgetMin)||0, bmax=Number(DATA.budgetMax)||0;
+  const tgt=(DATA.range)?DATA.range.target:0;
+  if(bud<=0) return tgt;
+  if(V>=bud){ const span=bmax-bud; return span>0 ? tgt*(1 + (V-bud)/span*(DATA.highBand||0)) : tgt; }
+  const span=bud-bmin; return span>0 ? tgt*(1 - (bud-V)/span*(DATA.lowBand||0)) : tgt;
+}
+function buildBudgetSection(){
+  const sl=document.getElementById("budget-slider");
+  if(!sl) return;
+  let min=Number(DATA.budgetMin)||0, max=Number(DATA.budgetMax)||0;
+  if(!(max>min)){ min=1000; max=20000; }
+  let bud=Number(DATA.monthlyBudget); if(!isFinite(bud)) bud=min;
+  bud=Math.min(max,Math.max(min,bud));
+  sl.min=min; sl.max=max; sl.step=1000; sl.value=bud;
+  setTxt("b-budget", usd(bud));
+  const ret0=budgetReturn(bud); setTxt("b-target", plusUsd(ret0));
+  const tgt0=DATA.range.target||0, f0=(tgt0!==0)?ret0/tgt0:1;
+  setTxt("b-leads", Math.round((DATA.ranked.leads||0)*f0).toLocaleString("en-US"));
+  const cur0=Number(DATA.current.revenue)||0;
+  setTxt("b-avgrev", usd(ret0 + cur0));
+  setTxt("b-pctinc", "+" + pct1(cur0>0 ? ret0/cur0 : 0));
+  const mk=document.getElementById("budget-marker");
+  if(mk){ const frac=(max>min)?(bud-min)/(max-min):0.5; mk.style.left=(frac*100)+"%"; }
+}
+
+function buildMonthKey(){
+  const el=document.getElementById("month-key");
+  if(!el) return;
+  el.innerHTML = DATA.months.map((m,i)=>`<span><b>M${i+1}</b><em>${m}</em></span>`).join("");
+}
+
+function buildTable(){
+  const tb=document.querySelector("#monthly-table tbody");
+  tb.innerHTML = DATA.months.map((m,i)=>
+    `<tr><td>${m}</td><td>${num(DATA.sessions[i])}</td><td>${num(DATA.leads[i])}</td>`+
+    `<td class="hl">${usd2(DATA.revenue[i])}</td><td>${usd2(DATA.baseline[i])}</td><td class="hl">${usd2(DATA.gain[i])}</td></tr>`).join("");
+  document.querySelector("#monthly-table tfoot").innerHTML =
+    `<tr><td>Total</td><td>${num(DATA.totals.sessions)}</td><td>${num(DATA.totals.leads)}</td>`+
+    `<td>${usd2(DATA.totals.revenue)}</td><td>${usd2(DATA.totals.baseline)}</td><td>${usd2(DATA.totals.gain)}</td></tr>`;
+}
+
+function buildCtrTable(){
+  const tb=document.querySelector("#ctr-table tbody");
+  const max=DATA.ctrByPosition[0]||1;
+  tb.innerHTML = DATA.ctrByPosition.map((c,i)=>
+    `<tr><td>Position ${i+1}</td><td class="ctr-bar-cell"><div class="ctr-bar" style="width:${(c/max*100).toFixed(0)}%"></div></td><td>${c.toFixed(2)}%</td></tr>`).join("");
+}
+
+/* ---- master render ------------------------------------------------------- */
+function render(raw){
+  if(!raw || !raw.months || raw.months.length===0){ status("Add at least one month to render."); return; }
+  DATA = computeDerived(raw);
+  populateCopy();
+  buildHeroChart();
+  buildRangeChart();
+  buildBudgetSection();
+  buildMonthKey();
+  buildTable();
+  buildCtrTable();
+}
+
+function initReveal(){
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target);} });
+  },{threshold:.15});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+}
+
+/* =============================================================================
+   LIVE EDITOR
+   ============================================================================= */
+const GROUPS = [
+  ["current","Current Performance (last 12 mo)",""],
+  ["ranked","Post-Optimization · Ranked Keywords","rk"]
+];
+const METRICS = [["sessions","Avg sessions"],["leads","Avg leads / transactions"],["revenue","Avg revenue ($)"]];
+
+const b64enc = s => btoa(unescape(encodeURIComponent(s)));
+const b64dec = s => decodeURIComponent(escape(atob(s)));
+let statusTimer;
+function status(msg){ const el=document.getElementById("ed-status"); if(!el) return;
+  el.textContent=msg; clearTimeout(statusTimer); statusTimer=setTimeout(()=>el.textContent="",3000); }
+
+function validRaw(o){
+  return o && o.current && o.ranked &&
+         Array.isArray(o.months) && Array.isArray(o.monthlySessions) &&
+         typeof o.current.sessions!=="undefined";
+}
+function loadInitial(){
+  const h=hashData();
+  if(h){ if(h.seo && validRaw(h.seo)) return h.seo; if(validRaw(h)) return h; }
+  try{ const s=localStorage.getItem(STORAGE_KEY); if(s){ const o=JSON.parse(s); if(validRaw(o)) return o; } }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+}
+function persist(raw){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(raw)); }catch(e){} }
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+function validSeo3(o){ return o && o.pages && validRaw(o.pages.target) && validRaw(o.pages.high) && validRaw(o.pages.low); }
+function persistSeo(){ try{ localStorage.setItem(STORAGE_KEY_SEO3, JSON.stringify({active:seoActive, pages:seoData})); }catch(e){} }
+function loadSeoPages(){
+  const h=hashData();
+  if(h && h.seo3 && validSeo3(h.seo3)) return h.seo3;
+  if(h && h.seo && validRaw(h.seo)) return { active:"target", pages:{ target:h.seo, high:clone(h.seo), low:clone(h.seo) } };
+  try{ const st=localStorage.getItem(STORAGE_KEY_SEO3); if(st){ const o=JSON.parse(st); if(validSeo3(o)) return o; } }catch(e){}
+  if(SEO3_DEFAULT && validSeo3(SEO3_DEFAULT)) return clone(SEO3_DEFAULT);
+  try{ const st=localStorage.getItem(STORAGE_KEY); if(st){ const o=JSON.parse(st); if(validRaw(o)) return { active:"target", pages:{ target:o, high:clone(o), low:clone(o) } }; } }catch(e){}
+  return { active:"target", pages:{ target:clone(DEFAULT_DATA), high:clone(DEFAULT_DATA), low:clone(DEFAULT_DATA) } };
+}
+function setSeoPage(page){
+  if(!seoData[page]) return;
+  seoActive=page; currentRaw=seoData[seoActive];
+  document.querySelectorAll("[data-seo-page]").forEach(b=>b.classList.toggle("active", b.dataset.seoPage===page));
+  render(currentRaw); buildEditor(currentRaw); syncRanked(); updateBandFields(); updateHeader("seo"); persistSeo();
+  status(SEO_LABELS[page]+" loaded.");
+}
+function wireSeoPages(){ document.querySelectorAll("[data-seo-page]").forEach(b=> b.addEventListener("click",()=>setSeoPage(b.dataset.seoPage)) ); }
+
+function buildEditor(raw){
+  const cvrPct = ((raw.cvr!=null && raw.cvr!=="") ? raw.cvr : (raw.current.sessions>0 ? raw.current.leads/raw.current.sessions : 0))*100;
+  const lv = (raw.leadValue!=null && raw.leadValue!=="") ? raw.leadValue : (raw.current.leads>0 ? raw.current.revenue/raw.current.leads : 0);
+  const _bud=(raw.monthlyBudget!=null?+raw.monthlyBudget:0), _bmin=(raw.budgetMin!=null?+raw.budgetMin:0), _bmax=(raw.budgetMax!=null?+raw.budgetMax:0);
+  const _lowB=_bud>0?0.75*((_bud-_bmin)/_bud):0, _highB=_bud>0?0.50*((_bmax-_bud)/_bud):0;
+  const fields=[
+    ["client","Client name","text",raw.client],
+    ["domain","Domain","text",raw.domain],
+    ["cvr","Organic CVR (%)","number",+cvrPct.toFixed(4)],
+    ["leadValue","Avg lead / transaction value ($)","number",+Number(lv).toFixed(2)],
+    ["lowBand","Low range band % (auto)","number",+(_lowB*100).toFixed(2),true],
+    ["highBand","High range band % (auto)","number",+(_highB*100).toFixed(2),true],
+    ["techLift","Technical fix lift (%)","number",+(((raw.techLift!=null?raw.techLift:0))*100).toFixed(4)],
+    ["monthlyBudget","Monthly budget ($)","number",(raw.monthlyBudget!=null?raw.monthlyBudget:5000)],
+    ["budgetMin","Budget slider min ($)","number",(raw.budgetMin!=null?raw.budgetMin:1000)],
+    ["budgetMax","Budget slider max ($)","number",(raw.budgetMax!=null?raw.budgetMax:9000)]
+  ];
+  document.getElementById("ed-fields").innerHTML = fields.map(f=>
+    `<div class="ed-field"><label>${f[1]}<input data-k="${f[0]}" type="${f[2]}" value="${f[3]}"${f[4]?' readonly style="background:var(--frost)"':''}></label></div>`).join("");
+
+  document.getElementById("ed-groups").innerHTML = GROUPS.map(([g,label,cls])=>
+    `<div class="ed-group ${cls}"><h4>${label}</h4>`+
+    METRICS.map(([m,ml])=>`<label>${ml}<input type="number" step="any" data-g="${g}" data-m="${m}" value="${raw[g][m]}"></label>`).join("")+
+    `</div>`).join("");
+
+  document.querySelector("#ed-table tbody").innerHTML =
+    raw.months.map((m,i)=>rowHtml(m,raw.monthlySessions[i])).join("");
+  document.getElementById("ed-ctr").value = raw.ctrByPosition.join(", ");
+  const kw = raw.keywords || {positionKey410:[12.07,6.88,5.15],positionKey1120:[4.50,2.19,1.06],kdBreaks:[30,60],rows:[]};
+  const keyInputs=(id,arr)=>{ document.getElementById(id).innerHTML=["Low KD %","Mid KD %","High KD %"].map((l,i)=>
+    `<div><label>${l}</label><input type="number" step="any" data-key="${id}" data-i="${i}" value="${arr[i]}"></div>`).join(""); };
+  keyInputs("key410", kw.positionKey410);
+  keyInputs("key1120", kw.positionKey1120);
+  keyInputs("key2130", kw.positionKey2130 || [1.06,0.87,0.84]);
+  document.getElementById("kd0").value = kw.kdBreaks[0];
+  document.getElementById("kd1").value = kw.kdBreaks[1];
+  buildKeywordRows(kw.rows||[]);
+  updateEditorSeasonality();
+}
+function rowHtml(m,s){
+  return `<tr><td><input class="e-month" value="${m??""}"></td>`+
+    `<td><input class="e-sess" type="number" step="any" value="${s??0}"></td>`+
+    `<td class="e-seas">–</td>`+
+    `<td><button class="e-del" title="Remove row">×</button></td></tr>`;
+}
+function updateEditorSeasonality(){
+  const rows=[...document.querySelectorAll("#ed-table tbody tr")];
+  const ms=rows.map(tr=>parseFloat(tr.querySelector(".e-sess").value)||0);
+  const avg=ms.length?ms.reduce((a,b)=>a+b,0)/ms.length:0;
+  rows.forEach((tr,i)=>{ const c=tr.querySelector(".e-seas"); if(c) c.textContent = avg>0 ? (ms[i]/avg*100).toFixed(1)+"%" : "–"; });
+}
+function esc(x){ return String(x==null?"":x).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;"); }
+function kwRowHtml(r){ r=r||{};
+  return `<tr><td class="kw-kw"><input class="k-kw" value="${esc(r.kw)}"></td>`+
+    `<td><input class="k-pos" type="number" step="any" value="${r.pos!=null?r.pos:0}"></td>`+
+    `<td><input class="k-sv" type="number" step="any" value="${r.sv!=null?r.sv:0}"></td>`+
+    `<td><input class="k-kd" type="number" step="any" value="${r.kd!=null?r.kd:0}"></td>`+
+    `<td class="calc k-traffic">0</td><td class="calc k-trans">0</td><td class="calc k-rev">$0.00</td>`+
+    `<td><button class="e-del kw-del" title="Remove">×</button></td></tr>`;
+}
+function buildKeywordRows(rows){
+  document.querySelector("#kw-table tbody").innerHTML = (rows||[]).map(kwRowHtml).join("");
+  updateKeywordTable();
+}
+function edVal(sel){ const el=document.querySelector(sel); return el?(parseFloat(el.value)||0):0; }
+function updateKeywordTable(){
+  const key410=[0,1,2].map(i=>edVal(`[data-key="key410"][data-i="${i}"]`));
+  const key1120=[0,1,2].map(i=>edVal(`[data-key="key1120"][data-i="${i}"]`));
+  const key2130=[0,1,2].map(i=>edVal(`[data-key="key2130"][data-i="${i}"]`));
+  const kd0=edVal("#kd0")||30, kd1=edVal("#kd1")||60;
+  const cvr=edVal('#ed-fields [data-k="cvr"]')/100;
+  const lv=edVal('#ed-fields [data-k="leadValue"]');
+  let tt=0;
+  [...document.querySelectorAll("#kw-table tbody tr")].forEach(tr=>{
+    const pos=parseFloat(tr.querySelector(".k-pos").value)||0;
+    const sv=parseFloat(tr.querySelector(".k-sv").value)||0;
+    const kd=parseFloat(tr.querySelector(".k-kd").value)||0;
+    const tier=kd<=kd0?0:(kd<=kd1?1:2);
+    const key=(pos>=4&&pos<=10)?key410:((pos>=11&&pos<=20)?key1120:((pos>=21&&pos<=30)?key2130:((pos>=1&&pos<=3)?key410:key1120)));
+    const traffic=Math.round(sv*((key[tier]||0)/100));
+    const trans=Math.round(traffic*cvr), rev=traffic*cvr*lv;
+    tr.querySelector(".k-traffic").textContent=traffic.toLocaleString("en-US");
+    tr.querySelector(".k-trans").textContent=trans.toLocaleString("en-US");
+    tr.querySelector(".k-rev").textContent="$"+rev.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+    tt+=traffic;
+  });
+  const tf=document.querySelector("#kw-table tfoot");
+  const nrows=document.querySelectorAll("#kw-table tbody tr").length;
+  if(tf){ const trans=Math.round(tt*cvr), rev=tt*cvr*lv;
+    tf.innerHTML = nrows ? `<tr><td>Totals · ${nrows} keyword${nrows===1?"":"s"}</td><td></td><td></td><td></td>`+
+      `<td>${tt.toLocaleString("en-US")}</td><td>${trans.toLocaleString("en-US")}</td>`+
+      `<td>$${rev.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}</td><td></td></tr>` : "";
+  }
+}
+function updateBandFields(){
+  if(!DATA) return;
+  const setF=(k,val)=>{ const el=document.querySelector(`#ed-fields [data-k="${k}"]`); if(el) el.value=+((val||0)*100).toFixed(2); };
+  setF("lowBand", DATA.lowBand); setF("highBand", DATA.highBand);
+}
+function syncRanked(){
+  const r = (DATA && DATA.ranked) ? DATA.ranked : {sessions:0,leads:0,revenue:0};
+  const set=(m,val)=>{ const el=document.querySelector(`[data-g="ranked"][data-m="${m}"]`); if(!el) return;
+    el.value = m==="revenue" ? (Math.round((val||0)*100)/100) : Math.round(val||0);
+    el.readOnly=true; el.style.background="var(--frost)"; };
+  set("sessions", r.sessions); set("leads", r.leads); set("revenue", r.revenue);
+}
+function parsePaste(text){
+  const out=[];
+  (text||"").split(/\r?\n/).forEach(line=>{
+    if(!line.trim()) return;
+    const parts = line.indexOf("\t")>=0 ? line.split("\t") : line.split(",");
+    out.push({ kw:(parts[0]||"").trim(), pos:parseFloat(parts[1])||0, sv:parseFloat(parts[2])||0, kd:parseFloat(parts[3])||0 });
+  });
+  if(out.length && /keyword|target/i.test(out[0].kw) && !(out[0].sv>0)) out.shift();
+  return out.slice(0,500);
+}
+function readEditor(){
+  const gv=k=>{ const el=document.querySelector(`#ed-fields [data-k="${k}"]`); return el?el.value:""; };
+  const grp=(g,m)=>{ const el=document.querySelector(`[data-g="${g}"][data-m="${m}"]`); return el?(parseFloat(el.value)||0):0; };
+  const rows=[...document.querySelectorAll("#ed-table tbody tr")];
+  const months=[], monthlySessions=[];
+  rows.forEach(tr=>{
+    months.push(tr.querySelector(".e-month").value||"");
+    monthlySessions.push(parseFloat(tr.querySelector(".e-sess").value)||0);
+  });
+  const ctr=(document.getElementById("ed-ctr").value||"").split(",").map(x=>parseFloat(x.trim())).filter(x=>!isNaN(x));
+  const gkey=id=>[0,1,2].map(i=>{const el=document.querySelector(`[data-key="${id}"][data-i="${i}"]`);return el?(parseFloat(el.value)||0):0;});
+  const kwRows=[...document.querySelectorAll("#kw-table tbody tr")].map(tr=>({
+    kw:tr.querySelector(".k-kw").value||"",
+    pos:parseFloat(tr.querySelector(".k-pos").value)||0,
+    sv:parseFloat(tr.querySelector(".k-sv").value)||0,
+    kd:parseFloat(tr.querySelector(".k-kd").value)||0
+  })).filter(r=>r.kw!=="" || r.sv>0);
+  const kd0=parseFloat((document.getElementById("kd0")||{}).value)||30;
+  const kd1=parseFloat((document.getElementById("kd1")||{}).value)||60;
+  return {
+    client:gv("client")||"Client", domain:gv("domain")||"",
+    current:{ sessions:grp("current","sessions"), leads:grp("current","leads"), revenue:grp("current","revenue") },
+    ranked:{ sessions:grp("ranked","sessions"), leads:grp("ranked","leads"), revenue:grp("ranked","revenue") },
+    months, monthlySessions,
+    cvr:(parseFloat(gv("cvr"))||0)/100,
+    leadValue:parseFloat(gv("leadValue"))||0,
+    techLift:(parseFloat(gv("techLift"))||0)/100,
+    monthlyBudget:parseFloat(gv("monthlyBudget"))||0,
+    budgetMin:parseFloat(gv("budgetMin"))||0,
+    budgetMax:parseFloat(gv("budgetMax"))||0,
+    ctrByPosition: ctr.length?ctr:DEFAULT_DATA.ctrByPosition.slice(),
+    keywords:{ positionKey410:gkey("key410"), positionKey1120:gkey("key1120"), positionKey2130:gkey("key2130"), kdBreaks:[kd0,kd1], rows:kwRows }
+  };
+}
+function applyFromEditor(){ const raw=readEditor(); currentRaw=raw; seoData[seoActive]=raw; render(raw); persistSeo(); updateEditorSeasonality(); updateKeywordTable(); syncRanked(); updateBandFields(); }
+
+let debounceTimer, budgetTimer;
+function wireEditor(){
+  const toggle=document.getElementById("editor-toggle");
+  const editor=document.getElementById("editor");
+  toggle.addEventListener("click",()=>{
+    const open=editor.classList.toggle("open");
+    toggle.setAttribute("aria-expanded",open?"true":"false");
+    toggle.textContent = open ? "✕ Close editor" : "✎ Edit data";
+    if(open) editor.scrollIntoView({behavior:"smooth"});
+  });
+  editor.addEventListener("input",()=>{ clearTimeout(debounceTimer); debounceTimer=setTimeout(()=>{ if(document.body.dataset.tab==="ux") applyUxFromEditor(); else applyFromEditor(); },250); });
+  const slider=document.getElementById("budget-slider");
+  if(slider) slider.addEventListener("input",e=>{
+    const v=Number(e.target.value)||0;
+    const ret=budgetReturn(v);
+    setTxt("b-budget", usd(v));
+    setTxt("b-target", plusUsd(ret));
+    const tgt=DATA.range.target||0, fac=(tgt!==0)?ret/tgt:1;
+    setTxt("b-leads", Math.round((DATA.ranked.leads||0)*fac).toLocaleString("en-US"));
+    const cur=Number(DATA.current.revenue)||0;
+    setTxt("b-avgrev", usd(ret + cur));
+    setTxt("b-pctinc", "+" + pct1(cur>0 ? ret/cur : 0));
+  });
+  const kwtb=document.querySelector("#kw-table tbody");
+  document.getElementById("kw-load").addEventListener("click",()=>{
+    const rows=parsePaste(document.getElementById("kw-paste").value);
+    if(!rows.length){ status("Nothing to load — paste rows first."); return; }
+    buildKeywordRows(rows); document.getElementById("kw-paste").value=""; applyFromEditor();
+    status(rows.length+" keyword row"+(rows.length===1?"":"s")+" loaded.");
+  });
+  document.getElementById("kw-add").addEventListener("click",()=>{
+    if(kwtb.querySelectorAll("tr").length>=500){ status("500-row limit reached."); return; }
+    kwtb.insertAdjacentHTML("beforeend",kwRowHtml({})); applyFromEditor();
+  });
+  document.getElementById("kw-clear").addEventListener("click",()=>{ buildKeywordRows([]); applyFromEditor(); status("Keyword table cleared."); });
+  kwtb.addEventListener("click",e=>{ if(e.target.classList.contains("kw-del")){ e.target.closest("tr").remove(); applyFromEditor(); } });
+  document.getElementById("ed-add").addEventListener("click",()=>{
+    const rows=[...document.querySelectorAll("#ed-table tbody tr")];
+    const ms=rows.map(tr=>parseFloat(tr.querySelector(".e-sess").value)||0);
+    const avg=ms.length?Math.round(ms.reduce((a,b)=>a+b,0)/ms.length):400;
+    document.querySelector("#ed-table tbody").insertAdjacentHTML("beforeend",rowHtml("M"+(rows.length+1),avg));
+    applyFromEditor();
+  });
+  document.querySelector("#ed-table tbody").addEventListener("click",e=>{
+    if(e.target.classList.contains("e-del")){ e.target.closest("tr").remove(); applyFromEditor(); }
+  });
+  document.getElementById("ed-apply").addEventListener("click",()=>{ applyFromEditor(); status("Applied."); });
+  document.getElementById("ed-link").addEventListener("click",()=>{
+    const enc="d="+b64enc(JSON.stringify({seo3:{active:seoActive,pages:seoData}, ux:uxRaw}));
+    const url=location.origin+location.pathname+"#"+enc;
+    navigator.clipboard.writeText(url).then(()=>status("Shareable link copied.")).catch(()=>{ location.hash=enc; status("Link set in address bar."); });
+  });
+  document.getElementById("ed-json").addEventListener("click",()=>{
+    const cfg=JSON.stringify({seo3:{active:seoActive,pages:seoData}, ux:uxRaw},null,2);
+    navigator.clipboard.writeText(cfg).then(()=>status("Config JSON copied.")).catch(()=>status("Copy failed — see console."));
+    try{ console.log(cfg); }catch(e){}
+  });
+  document.getElementById("ed-download").addEventListener("click",downloadStandalone);
+  document.getElementById("ed-pdf").addEventListener("click",()=>{
+    const dets=[...document.querySelectorAll("details")];
+    const prev=dets.map(d=>d.open); dets.forEach(d=>d.open=true);
+    const restore=()=>{ dets.forEach((d,i)=>d.open=prev[i]); window.removeEventListener("afterprint",restore); };
+    window.addEventListener("afterprint",restore);
+    status("Opening print dialog \u2014 choose \u201cSave as PDF\u201d.");
+    setTimeout(()=>window.print(),60);
+  });
+  document.getElementById("ed-reset").addEventListener("click",()=>{
+    if(document.body.dataset.tab==="ux"){
+      const sc=(uxRaw&&uxRaw.scenarios)||UX_DEFAULT_DATA.scenarios;
+      uxRaw={ client:"", domain:"", monthlyVisitors:"", reachPct:"", dcr:"", giftValue:"",
+        monthlyRetainer:"", engagementMonths:"", recommended:(uxRaw&&uxRaw.recommended)||"expected",
+        scenarios:JSON.parse(JSON.stringify(sc)) };
+      persistUx(uxRaw); buildUxEditor(uxRaw); renderUx(uxRaw); updateHeader("ux");
+      status("Cleared — test-scenario assumptions kept."); return;
+    }
+    const kw = currentRaw.keywords || DEFAULT_DATA.keywords, dk = DEFAULT_DATA.keywords;
+    currentRaw = {
+      client:"", domain:"",
+      current:{sessions:"",leads:"",revenue:""},
+      ranked:{sessions:0,leads:0,revenue:0},
+      months: Array(12).fill(""),
+      monthlySessions: Array(12).fill(""),
+      cvr:0, leadValue:0, techLift:0,
+      monthlyBudget:"", budgetMin:"", budgetMax:"",
+      ctrByPosition:(currentRaw.ctrByPosition||DEFAULT_DATA.ctrByPosition).slice(),
+      keywords:{
+        positionKey410:(kw.positionKey410||dk.positionKey410).slice(),
+        positionKey1120:(kw.positionKey1120||dk.positionKey1120).slice(),
+        positionKey2130:(kw.positionKey2130||dk.positionKey2130).slice(),
+        kdBreaks:(kw.kdBreaks||dk.kdBreaks).slice(),
+        rows:[]
+      }
+    };
+    if(location.hash) history.replaceState(null,"",location.pathname);
+    seoData[seoActive]=currentRaw; persistSeo();
+    buildEditor(currentRaw); render(currentRaw); syncRanked(); updateBandFields();
+    status("Cleared \u2014 Position Keys, KD tiers & CTR kept.");
+  });
+}
+function dl(text,name,type){ const b=new Blob([text],{type:type||"text/html"}); const u=URL.createObjectURL(b);
+  const a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u); }
+async function downloadStandalone(){
+  const slug=(currentRaw.client||"seo-forecast").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  try{
+    const src=await (await fetch(location.href)).text();
+    let out=src.replace(/const DEFAULT_DATA\s*=\s*\{[\s\S]*?\n\};/, "const DEFAULT_DATA = "+JSON.stringify(currentRaw,null,2)+";");
+    out=out.replace(/const UX_DEFAULT_DATA\s*=\s*\{[\s\S]*?\n\};/, "const UX_DEFAULT_DATA = "+JSON.stringify(uxRaw,null,2)+";");
+    out=out.replace(/const SEO3_DEFAULT = null;/, "const SEO3_DEFAULT = "+JSON.stringify({active:seoActive,pages:seoData})+";");
+    if(out===src) throw new Error("marker not found");
+    dl(out, slug+"-forecast.html");
+    status("Downloaded standalone HTML.");
+  }catch(e){
+    dl(JSON.stringify(currentRaw,null,2), slug+"-data.json", "application/json");
+    status("Couldn't rebuild HTML here — downloaded config JSON instead.");
+  }
+}
+
+/* ===================== UX / CRO tab ===================== */
+function hashData(){ try{ const h=location.hash.slice(1); if(h.indexOf("d=")===0) return JSON.parse(b64dec(h.slice(2))); }catch(e){} return null; }
+function validUx(o){ return o && typeof o.monthlyVisitors!=="undefined" && o.scenarios; }
+function persistUx(raw){ try{ localStorage.setItem(STORAGE_KEY_UX, JSON.stringify(raw)); }catch(e){} }
+function loadUxInitial(){
+  const h=hashData();
+  if(h && h.ux && validUx(h.ux)) return h.ux;
+  try{ const s=localStorage.getItem(STORAGE_KEY_UX); if(s){ const o=JSON.parse(s); if(validUx(o)) return o; } }catch(e){}
+  return JSON.parse(JSON.stringify(UX_DEFAULT_DATA));
+}
+function computeUx(raw){
+  const u=JSON.parse(JSON.stringify(raw));
+  const visitors=Number(u.monthlyVisitors)||0, reach=Number(u.reachPct)||0, dcr=Number(u.dcr)||0, gift=Number(u.giftValue)||0;
+  u.donationPageVisitors=visitors*reach;
+  u.monthlyDonors=u.donationPageVisitors*dcr;
+  u.monthlyIncome=u.monthlyDonors*gift;
+  u.annualIncome=u.monthlyIncome*12;
+  u.totalInvestment=(Number(u.monthlyRetainer)||0)*(Number(u.engagementMonths)||0);
+  u.calc={};
+  ["conservative","expected","aggressive"].forEach(k=>{
+    const sc=u.scenarios[k]||{};
+    const effLift=((Number(sc.lift)||0)/100)*((Number(sc.winRate)||0)/100);
+    const comp=Math.pow(1+effLift, Number(sc.tests)||0);
+    const newDonors=u.monthlyDonors*comp, addDonors=newDonors-u.monthlyDonors;
+    const addMonthly=addDonors*gift, addAnnual=addMonthly*12;
+    u.calc[k]={ effLift, comp, projDCR:dcr*comp, relLift:comp-1, newDonors, addDonors, addMonthly, addAnnual,
+      mission: u.totalInvestment>0 ? addAnnual/u.totalInvestment : 0,
+      payback: addMonthly>0 ? u.totalInvestment/addMonthly : 0,
+      netFunds: addAnnual - u.totalInvestment };
+  });
+  u.recKey=u.recommended||"expected";
+  u.rec=u.calc[u.recKey]||u.calc.expected;
+  return u;
+}
+function buildUxTable(){
+  const cols=["conservative","expected","aggressive"], rec=UXD.recKey, C=UXD.calc, S=UXD.scenarios;
+  const pct2=x=>(x*100).toFixed(2)+"%";
+  const rows=[
+    ["Avg lift per winning test", k=>(S[k].lift||0)+"%"],
+    ["Win rate", k=>(S[k].winRate||0)+"%"],
+    ["Tests per year", k=>String(S[k].tests||0)],
+    ["Projected donation CR", k=>pct2(C[k].projDCR)],
+    ["Relative DCR lift", k=>"+"+pct1(C[k].relLift)],
+    ["Additional monthly donors", k=>"+"+Math.round(C[k].addDonors).toLocaleString("en-US")],
+    ["Additional monthly funds", k=>plusUsd(C[k].addMonthly)],
+    ["Additional annual funds", k=>plusUsd(C[k].addAnnual)],
+    ["Mission impact multiplier", k=>C[k].mission.toFixed(1)+"\u00d7"],
+    ["Payback (months)", k=>C[k].payback>0?C[k].payback.toFixed(1):"\u2014"],
+    ["Net additional funds (after fee)", k=>plusUsd(C[k].netFunds)]
+  ];
+  const tb=document.querySelector("#ux-table tbody");
+  if(tb) tb.innerHTML=rows.map(r=>"<tr><td>"+r[0]+"</td>"+cols.map(k=>'<td class="'+(k===rec?"hl":"")+'">'+r[1](k)+"</td>").join("")+"</tr>").join("");
+  document.querySelectorAll("#ux-table thead th").forEach((th,i)=>{ if(i>0) th.classList.toggle("hl", cols[i-1]===rec); });
+}
+function renderUx(raw){
+  UXD=computeUx(raw);
+  const r=UXD.rec;
+  setTxt("ux-annual", plusUsd(r.addAnnual));
+  setTxt("ux-mission", r.mission.toFixed(1)+"\u00d7");
+  setTxt("ux-payback", r.payback>0?r.payback.toFixed(1):"\u2014");
+  setTxt("ux-net", plusUsd(r.netFunds));
+  setTxt("ux-scenario-note", cap(UXD.recKey)+" scenario");
+  setTxt("ux-lede", "Baseline: "+Math.round(UXD.monthlyDonors).toLocaleString("en-US")+" monthly donors and "+usd(UXD.monthlyIncome)+"/mo. Figures show the "+cap(UXD.recKey)+" scenario, compounded over "+((UXD.engagementMonths)||12)+" months of testing.");
+  buildUxTable();
+  if(document.body.dataset.tab==="ux") updateHeader("ux");
+}
+function buildUxEditor(u){
+  const fields=[
+    ["client","Client / organization","text",u.client],
+    ["domain","Website","text",u.domain],
+    ["monthlyVisitors","Monthly visitors","number",u.monthlyVisitors],
+    ["reachPct","% reaching donation page","number",+((Number(u.reachPct)||0)*100).toFixed(4)],
+    ["dcr","Current donation CR (%)","number",+((Number(u.dcr)||0)*100).toFixed(4)],
+    ["giftValue","Average gift value ($)","number",u.giftValue],
+    ["monthlyRetainer","Monthly retainer ($)","number",u.monthlyRetainer],
+    ["engagementMonths","Engagement length (months)","number",u.engagementMonths]
+  ];
+  let html=fields.map(f=>'<div class="ed-field"><label>'+f[1]+'<input data-uk="'+f[0]+'" type="'+f[2]+'" value="'+f[3]+'"></label></div>').join("");
+  const rec=u.recommended||"expected";
+  html+='<div class="ed-field"><label>Recommended scenario<select data-uk="recommended">'+
+    ["conservative","expected","aggressive"].map(k=>'<option value="'+k+'"'+(k===rec?" selected":"")+'>'+cap(k)+'</option>').join("")+'</select></label></div>';
+  const ef=document.getElementById("ux-fields"); if(ef) ef.innerHTML=html;
+  const scen=[["conservative","Conservative"],["expected","Expected"],["aggressive","Aggressive"]];
+  const metrics=[["lift","Avg lift / test (%)"],["winRate","Win rate (%)"],["tests","Tests / year"]];
+  const es=document.getElementById("ux-scenarios");
+  if(es) es.innerHTML=scen.map(sc=>'<div class="ed-key"><h5>'+sc[1]+'</h5>'+
+    metrics.map(m=>'<label>'+m[1]+'<input type="number" step="any" data-us="'+sc[0]+'" data-um="'+m[0]+'" value="'+((u.scenarios[sc[0]]||{})[m[0]])+'"></label>').join("")+'</div>').join("");
+}
+function readUxEditor(){
+  const gv=k=>{const el=document.querySelector('#ux-fields [data-uk="'+k+'"]');return el?el.value:"";};
+  const sc=(k,m)=>{const el=document.querySelector('[data-us="'+k+'"][data-um="'+m+'"]');return el?(parseFloat(el.value)||0):0;};
+  const scen=k=>({lift:sc(k,"lift"),winRate:sc(k,"winRate"),tests:sc(k,"tests")});
+  return { client:gv("client")||"Client", domain:gv("domain")||"",
+    monthlyVisitors:parseFloat(gv("monthlyVisitors"))||0,
+    reachPct:(parseFloat(gv("reachPct"))||0)/100,
+    dcr:(parseFloat(gv("dcr"))||0)/100,
+    giftValue:parseFloat(gv("giftValue"))||0,
+    monthlyRetainer:parseFloat(gv("monthlyRetainer"))||0,
+    engagementMonths:parseFloat(gv("engagementMonths"))||0,
+    recommended:gv("recommended")||"expected",
+    scenarios:{conservative:scen("conservative"),expected:scen("expected"),aggressive:scen("aggressive")} };
+}
+function applyUxFromEditor(){ uxRaw=readUxEditor(); renderUx(uxRaw); persistUx(uxRaw); }
+function updateHeader(tab){
+  if(tab==="ux"){
+    const u=UXD||uxRaw||UX_DEFAULT_DATA;
+    setTxt("h-client", u.client||"Client"); setTxt("h-disc","UX");
+    setTxt("h-window", (UXD?UXD.engagementMonths:(uxRaw&&uxRaw.engagementMonths))||12);
+    setTxt("hero-eyebrow","Prepared for "+(u.domain||""));
+    setTxt("mast-meta","UX / CRO Forecast");
+  } else {
+    const d=DATA||currentRaw||DEFAULT_DATA;
+    setTxt("h-client", d.client||"Client"); setTxt("h-disc","SEO");
+    setTxt("h-window", (DATA?DATA.months.length:((currentRaw&&currentRaw.months)||[]).length)||12);
+    setTxt("hero-eyebrow","Prepared for "+(d.domain||""));
+    setTxt("mast-meta","SEO Revenue Forecast");
+  }
+}
+function setTab(tab){
+  document.body.dataset.tab=tab;
+  document.querySelectorAll("[data-tab-btn]").forEach(b=>b.classList.toggle("active", b.dataset.tabBtn===tab));
+  if(tab==="ux") renderUx(uxRaw); else render(currentRaw);
+  updateHeader(tab);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function wireTabs(){ document.querySelectorAll("[data-tab-btn]").forEach(b=> b.addEventListener("click",()=>setTab(b.dataset.tabBtn)) ); }
+
+/* ---- boot ---------------------------------------------------------------- */
+const _seo = loadSeoPages();
+seoData = _seo.pages; seoActive = _seo.active || "target";
+currentRaw = seoData[seoActive];
+uxRaw = loadUxInitial();
+render(currentRaw);
+initReveal();
+buildEditor(currentRaw);
+wireEditor();
+syncRanked();
+updateBandFields();
+buildUxEditor(uxRaw);
+renderUx(uxRaw);
+wireTabs();
+wireSeoPages();
+document.querySelectorAll("[data-seo-page]").forEach(b=>b.classList.toggle("active", b.dataset.seoPage===seoActive));
+updateHeader(document.body.dataset.tab||"seo");
+</script>
+</body>
+</html>
