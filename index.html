@@ -275,9 +275,9 @@
 <div class="seo-pagebar" data-tab="seo">
   <div class="wrap">
     <div class="pagebtns" role="tablist">
+      <button class="pagebtn" data-seo-page="low" role="tab">Low Estimate</button>
       <button class="pagebtn active" data-seo-page="target" role="tab">Target Estimate</button>
       <button class="pagebtn" data-seo-page="high" role="tab">High Estimate</button>
-      <button class="pagebtn" data-seo-page="low" role="tab">Low Estimate</button>
     </div>
   </div>
 </div>
@@ -288,10 +288,6 @@
     <h2 class="section-title" id="range-title">Target, High &amp; Low Avg. Monthly Increase</h2>
     <p class="section-lede" id="range-lede">Projected monthly organic run rate after the forecast window.</p>
     <div class="range-wrap reveal" style="margin-top:18px">
-      <div class="budget-slider-wrap">
-        <input type="range" id="budget-slider" class="budget-slider" step="1000" aria-label="Monthly budget" />
-        <div class="budget-target-marker" id="budget-marker"><span>Target</span></div>
-      </div>
       <div class="range-figures three">
         <div class="range-fig target"><div class="lbl">Monthly budget</div><div class="amt" id="b-budget">$0</div></div>
         <div class="range-fig high"><div class="lbl">Projected monthly return</div><div class="amt" id="b-target">+$0</div></div>
@@ -299,7 +295,8 @@
       </div>
     </div>
     <div class="range-wrap reveal" style="margin-top:18px">
-      <div class="range-figures two">
+      <div class="range-figures three">
+        <div class="range-fig low"><div class="lbl">Current Avg. Monthly Revenue</div><div class="amt" id="b-currev">$0</div></div>
         <div class="range-fig target"><div class="lbl">Average Monthly Revenue</div><div class="amt" id="b-avgrev">$0</div></div>
         <div class="range-fig high"><div class="lbl">Percentage Increase</div><div class="amt" id="b-pctinc">+0%</div></div>
       </div>
@@ -784,22 +781,15 @@ function budgetReturn(V){
   const span=bud-bmin; return span>0 ? tgt*(1 - (bud-V)/span*(DATA.lowBand||0)) : tgt;
 }
 function buildBudgetSection(){
-  const sl=document.getElementById("budget-slider");
-  if(!sl) return;
-  let min=Number(DATA.budgetMin)||0, max=Number(DATA.budgetMax)||0;
-  if(!(max>min)){ min=1000; max=20000; }
-  let bud=Number(DATA.monthlyBudget); if(!isFinite(bud)) bud=min;
-  bud=Math.min(max,Math.max(min,bud));
-  sl.min=min; sl.max=max; sl.step=1000; sl.value=bud;
+  const bud=Number(DATA.monthlyBudget)||0;
+  const tgt=(DATA.range?DATA.range.target:0)||0;
+  const cur=Number(DATA.current.revenue)||0;
   setTxt("b-budget", usd(bud));
-  const ret0=budgetReturn(bud); setTxt("b-target", plusUsd(ret0));
-  const tgt0=DATA.range.target||0, f0=(tgt0!==0)?ret0/tgt0:1;
-  setTxt("b-leads", Math.round((DATA.ranked.leads||0)*f0).toLocaleString("en-US"));
-  const cur0=Number(DATA.current.revenue)||0;
-  setTxt("b-avgrev", usd(ret0 + cur0));
-  setTxt("b-pctinc", "+" + pct1(cur0>0 ? ret0/cur0 : 0));
-  const mk=document.getElementById("budget-marker");
-  if(mk){ const frac=(max>min)?(bud-min)/(max-min):0.5; mk.style.left=(frac*100)+"%"; }
+  setTxt("b-target", plusUsd(tgt));
+  setTxt("b-leads", Math.round(DATA.ranked.leads||0).toLocaleString("en-US"));
+  setTxt("b-currev", usd(cur));
+  setTxt("b-avgrev", usd(tgt + cur));
+  setTxt("b-pctinc", "+" + pct1(cur>0 ? tgt/cur : 0));
 }
 
 function buildMonthKey(){
@@ -892,23 +882,25 @@ function setSeoPage(page){
   status(SEO_LABELS[page]+" loaded.");
 }
 function wireSeoPages(){ document.querySelectorAll("[data-seo-page]").forEach(b=> b.addEventListener("click",()=>setSeoPage(b.dataset.seoPage)) ); }
+function syncSharedFromTarget(){
+  const t=seoData.target; if(!t) return;
+  ["high","low"].forEach(k=>{
+    const p=seoData[k]; if(!p) return;
+    p.client=t.client; p.domain=t.domain; p.cvr=t.cvr; p.leadValue=t.leadValue;
+    p.current=clone(t.current); p.months=clone(t.months); p.monthlySessions=clone(t.monthlySessions);
+  });
+}
 
 function buildEditor(raw){
   const cvrPct = ((raw.cvr!=null && raw.cvr!=="") ? raw.cvr : (raw.current.sessions>0 ? raw.current.leads/raw.current.sessions : 0))*100;
   const lv = (raw.leadValue!=null && raw.leadValue!=="") ? raw.leadValue : (raw.current.leads>0 ? raw.current.revenue/raw.current.leads : 0);
-  const _bud=(raw.monthlyBudget!=null?+raw.monthlyBudget:0), _bmin=(raw.budgetMin!=null?+raw.budgetMin:0), _bmax=(raw.budgetMax!=null?+raw.budgetMax:0);
-  const _lowB=_bud>0?0.75*((_bud-_bmin)/_bud):0, _highB=_bud>0?0.50*((_bmax-_bud)/_bud):0;
   const fields=[
     ["client","Client name","text",raw.client],
     ["domain","Domain","text",raw.domain],
     ["cvr","Organic CVR (%)","number",+cvrPct.toFixed(4)],
     ["leadValue","Avg lead / transaction value ($)","number",+Number(lv).toFixed(2)],
-    ["lowBand","Low range band % (auto)","number",+(_lowB*100).toFixed(2),true],
-    ["highBand","High range band % (auto)","number",+(_highB*100).toFixed(2),true],
     ["techLift","Technical fix lift (%)","number",+(((raw.techLift!=null?raw.techLift:0))*100).toFixed(4)],
-    ["monthlyBudget","Monthly budget ($)","number",(raw.monthlyBudget!=null?raw.monthlyBudget:5000)],
-    ["budgetMin","Budget slider min ($)","number",(raw.budgetMin!=null?raw.budgetMin:1000)],
-    ["budgetMax","Budget slider max ($)","number",(raw.budgetMax!=null?raw.budgetMax:9000)]
+    ["monthlyBudget","Monthly budget ($)","number",(raw.monthlyBudget!=null?raw.monthlyBudget:5000)]
   ];
   document.getElementById("ed-fields").innerHTML = fields.map(f=>
     `<div class="ed-field"><label>${f[1]}<input data-k="${f[0]}" type="${f[2]}" value="${f[3]}"${f[4]?' readonly style="background:var(--frost)"':''}></label></div>`).join("");
@@ -1043,7 +1035,7 @@ function readEditor(){
     keywords:{ positionKey410:gkey("key410"), positionKey1120:gkey("key1120"), positionKey2130:gkey("key2130"), kdBreaks:[kd0,kd1], rows:kwRows }
   };
 }
-function applyFromEditor(){ const raw=readEditor(); currentRaw=raw; seoData[seoActive]=raw; render(raw); persistSeo(); updateEditorSeasonality(); updateKeywordTable(); syncRanked(); updateBandFields(); }
+function applyFromEditor(){ const raw=readEditor(); currentRaw=raw; seoData[seoActive]=raw; if(seoActive==="target") syncSharedFromTarget(); render(raw); persistSeo(); updateEditorSeasonality(); updateKeywordTable(); syncRanked(); updateBandFields(); }
 
 let debounceTimer, budgetTimer;
 function wireEditor(){
@@ -1139,7 +1131,7 @@ function wireEditor(){
       }
     };
     if(location.hash) history.replaceState(null,"",location.pathname);
-    seoData[seoActive]=currentRaw; persistSeo();
+    seoData[seoActive]=currentRaw; if(seoActive==="target") syncSharedFromTarget(); persistSeo();
     buildEditor(currentRaw); render(currentRaw); syncRanked(); updateBandFields();
     status("Cleared \u2014 Position Keys, KD tiers & CTR kept.");
   });
@@ -1293,6 +1285,7 @@ function wireTabs(){ document.querySelectorAll("[data-tab-btn]").forEach(b=> b.a
 const _seo = loadSeoPages();
 seoData = _seo.pages; seoActive = _seo.active || "target";
 currentRaw = seoData[seoActive];
+syncSharedFromTarget();
 uxRaw = loadUxInitial();
 render(currentRaw);
 initReveal();
