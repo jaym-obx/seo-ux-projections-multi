@@ -487,6 +487,10 @@
     <h2 class="section-title">SEO + UX Projected Revenue Increase</h2>
     <p class="section-lede">Blend an SEO estimate with a UX estimate to see the combined projected revenue impact. Slide each budget to Low, Target, or High.</p>
     <div class="range-wrap reveal">
+      <div class="range-figures two" style="margin-bottom:28px">
+        <div class="range-fig target"><div class="lbl">Avg Monthly Revenue Increase</div><div class="amt" id="cbnd-monthly">$0</div></div>
+        <div class="range-fig high"><div class="lbl">Yearly Revenue Increase</div><div class="amt" id="cbnd-yearly">$0</div></div>
+      </div>
       <div class="cbnd-sliders">
         <div class="cbnd-slider">
           <div class="cbnd-slider-head"><span class="lbl">SEO Budget</span><span class="cbnd-val" id="cbnd-seo-val">Target</span></div>
@@ -498,10 +502,6 @@
           <input type="range" id="cbnd-ux" class="budget-slider" min="0" max="2" step="1" value="1" aria-label="UX budget estimate" />
           <div class="cbnd-ticks"><span id="cbnd-ux-lo">Low</span><span id="cbnd-ux-tg" class="on">Target</span><span id="cbnd-ux-hi">High</span></div>
         </div>
-      </div>
-      <div class="range-figures two" style="margin-top:26px">
-        <div class="range-fig target"><div class="lbl">Avg Monthly Revenue Increase</div><div class="amt" id="cbnd-monthly">$0</div></div>
-        <div class="range-fig high"><div class="lbl">Yearly Revenue Increase</div><div class="amt" id="cbnd-yearly">$0</div></div>
       </div>
     </div>
   </div>
@@ -746,7 +746,7 @@ function populateCopy(){
   setTxt("m-window", MN + " mo");
   setTxt("f-client", `${DATA.client} (${DATA.domain})`);
   setTxt("range-title", (SEO_LABELS[seoActive]||"Estimate") + " — Avg. Monthly Increase");
-  setTxt("range-lede", "Projected additional monthly organic revenue for the "+((SEO_LABELS[seoActive]||"selected").toLowerCase())+". Drag the budget slider to explore scenarios by spend.");
+  setTxt("range-lede", "Projected additional monthly organic revenue for the "+((SEO_LABELS[seoActive]||"selected").toLowerCase())+", based on the target keywords for this estimate.");
 }
 
 /* ---- charts -------------------------------------------------------------- */
@@ -1325,7 +1325,7 @@ function readUxEditor(){
 function applyUxFromEditor(){ uxRaw=readUxEditor(); uxData[uxActive]=uxRaw; if(uxActive==="target") uxSyncSharedFromTarget(); renderUx(uxRaw); persistUx3(); }
 function combinedFigures(){
   const seoKeys=["low","target","high"], uxKeys=["low","target","high"];
-  const gp=id=>{ const el=document.getElementById(id); return Math.max(0,Math.min(2, Math.round(Number(el?el.value:1)||1))); };
+  const gp=id=>{ const el=document.getElementById(id); const v=el?Math.round(Number(el.value)):1; return isNaN(v)?1:Math.max(0,Math.min(2,v)); };
   const sp=gp("cbnd-seo"), up=gp("cbnd-ux");
   const sKey=seoKeys[sp], uKey=uxKeys[up];
   const D=computeDerived(seoData[sKey]||seoData.target||DEFAULT_DATA);
