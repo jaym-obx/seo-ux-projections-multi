@@ -62,8 +62,10 @@
     font:800 .92rem var(--sans);letter-spacing:.02em;padding:15px 18px;border-radius:9px;cursor:pointer;transition:background .15s,border-color .15s,color .15s,box-shadow .15s}
   .pagebtn:hover{border-color:var(--obx-blue);color:var(--obx-blue)}
   .pagebtn.active{background:var(--obx-blue);border-color:var(--obx-blue);color:#fff;box-shadow:0 4px 14px rgba(29,78,137,.28)}
-  body[data-tab="ux"] [data-tab="seo"]{display:none !important}
-  body[data-tab="seo"] [data-tab="ux"]{display:none !important}
+  body[data-tab="seo"] [data-tab="ux"], body[data-tab="seo"] [data-tab="combined"]{display:none !important}
+  body[data-tab="ux"] [data-tab="seo"], body[data-tab="ux"] [data-tab="combined"]{display:none !important}
+  body[data-tab="combined"] [data-tab="seo"], body[data-tab="combined"] [data-tab="ux"]{display:none !important}
+  body[data-tab="combined"] .editor, body[data-tab="combined"] .editor-toggle{display:none !important}
   .editor select{font:400 .95rem var(--sans);color:var(--dark-blue);padding:9px 11px;border:1px solid #CBD5DE;border-radius:5px;background:#fff;width:100%}
   .editor select:focus{outline:2px solid var(--obx-blue);border-color:var(--obx-blue)}
 
@@ -99,6 +101,17 @@
   .range-fig .note{font-size:.76rem;color:var(--slate);margin-top:.2rem}
   .range-figures.two{grid-template-columns:repeat(2,1fr)}
   .range-figures.three{grid-template-columns:repeat(3,1fr)}
+  .range-figures.four{grid-template-columns:repeat(4,1fr)}
+  .cbnd-sliders{display:grid;gap:22px;margin-top:8px}
+  .cbnd-slider-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+  .cbnd-slider-head .lbl{font:800 1rem var(--sans);color:var(--dark-blue)}
+  .cbnd-val{font:700 .92rem var(--sans);color:var(--obx-blue)}
+  .cbnd-slider .budget-slider{margin:8px 0 8px}
+  .cbnd-ticks{display:flex;justify-content:space-between;margin-top:2px}
+  .cbnd-ticks span{font:600 .82rem var(--sans);color:var(--slate);flex:1 1 0}
+  .cbnd-ticks span:nth-child(2){text-align:center}
+  .cbnd-ticks span:last-child{text-align:right}
+  .cbnd-ticks span.on{color:var(--obx-blue);font-weight:800}
   .budget-slider{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:5px;background:#DCE4EB;outline:none;margin:6px 0 24px}
   .budget-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--obx-blue);border:3px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.28);cursor:pointer}
   .budget-slider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--obx-blue);border:3px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.28);cursor:pointer}
@@ -268,6 +281,7 @@
     <div class="tabs" role="tablist">
       <button class="tab active" data-tab-btn="seo" role="tab">SEO Estimates</button>
       <button class="tab" data-tab-btn="ux" role="tab">UX Estimates</button>
+      <button class="tab" data-tab-btn="combined" role="tab">Combined</button>
     </div>
   </div>
 </section>
@@ -394,18 +408,28 @@
 
 <button class="editor-toggle" id="editor-toggle" aria-expanded="false">✎ Edit data</button>
 
+<div class="ux-pagebar seo-pagebar" data-tab="ux">
+  <div class="wrap">
+    <div class="pagebtns" role="tablist">
+      <button class="pagebtn" data-ux-page="low" role="tab">Low Estimate</button>
+      <button class="pagebtn active" data-ux-page="target" role="tab">Target Estimate</button>
+      <button class="pagebtn" data-ux-page="high" role="tab">High Estimate</button>
+    </div>
+  </div>
+</div>
+
 <section class="range-compact" data-tab="ux">
   <div class="wrap">
     <p class="eyebrow">UX / CRO Forecast</p>
-    <h2 class="section-title">Projected Annual Donation Lift</h2>
+    <h2 class="section-title">Projected Lift</h2>
     <p class="section-lede" id="ux-lede">Recommended scenario, compounded across a 12-month testing program.</p>
     <div class="range-wrap reveal">
-      <div class="range-figures three">
-        <div class="range-fig target"><div class="lbl">Additional annual funds</div><div class="amt" id="ux-annual">+$0</div><div class="note" id="ux-scenario-note">Expected scenario</div></div>
-        <div class="range-fig high"><div class="lbl">Mission impact multiplier</div><div class="amt" id="ux-mission">0&times;</div><div class="note">Annual funds &divide; investment</div></div>
-        <div class="range-fig low"><div class="lbl">Payback</div><div class="amt" id="ux-payback">0</div><div class="note">months</div></div>
+      <div class="range-figures four">
+        <div class="range-fig target"><div class="lbl">Projected Monthly Lift</div><div class="amt" id="ux-monthly">+$0</div><div class="note">Annual lift &divide; 12</div></div>
+        <div class="range-fig target"><div class="lbl">Projected Annual Lift</div><div class="amt" id="ux-annual">+$0</div><div class="note" id="ux-scenario-note">Expected scenario</div></div>
+        <div class="range-fig high"><div class="lbl">ROI Multiple</div><div class="amt" id="ux-roi">0&times;</div><div class="note">Annual lift &divide; investment</div></div>
+        <div class="range-fig low"><div class="lbl">Payback Period</div><div class="amt" id="ux-payback">0</div><div class="note">months</div></div>
       </div>
-      <p style="text-align:center;margin:18px 0 0;color:var(--slate);font-size:.95rem">Net additional funds after the UX investment: <strong id="ux-net" style="color:var(--obx-blue)">+$0</strong></p>
     </div>
   </div>
 </section>
@@ -414,7 +438,7 @@
   <div class="wrap">
     <p class="eyebrow">Scenarios</p>
     <h2 class="section-title">Conservative, Expected &amp; Aggressive</h2>
-    <p class="section-lede">Twelve months of compounding donation conversion-rate gains from an iterative testing program. Expected is the recommended planning case.</p>
+    <p class="section-lede">Twelve months of compounding conversion-rate gains from an iterative testing program. Expected is the recommended planning case.</p>
     <div class="table-scroll reveal">
       <table class="monthly" id="ux-table">
         <thead><tr><th>Metric</th><th>Conservative</th><th>Expected</th><th>Aggressive</th></tr></thead>
@@ -432,28 +456,54 @@
         <h2 class="section-title">Compounding test-program model</h2>
       </summary>
       <div class="calc-body">
-        <p class="section-lede">Each winning A/B test lifts the donation conversion rate; wins compound across the year.</p>
+        <p class="section-lede">Each winning A/B test lifts the conversion rate; wins compound across a 12-month testing program.</p>
         <div class="method-cols">
           <div>
             <h3>The model</h3>
             <ul class="assump">
               <li><b>Effective lift per test</b> = average lift of a winning test &times; win rate.</li>
               <li><b>Compounding factor</b> = (1 + effective lift) raised to the number of tests per year.</li>
-              <li><b>Projected donation CR</b> = current rate &times; compounding factor; donors and funds raised scale the same way.</li>
-              <li><b>Mission impact</b> = additional annual funds &divide; total UX investment; <b>payback</b> = investment &divide; additional monthly funds.</li>
+              <li><b>Projected CR</b> = current rate &times; compounding factor; monthly revenue scales the same way.</li>
+              <li><b>ROI multiple</b> = annual revenue lift &divide; total UX investment; <b>payback</b> = investment &divide; monthly revenue lift.</li>
             </ul>
           </div>
           <div>
             <h3>Basis &amp; disclaimers</h3>
             <ul class="assump">
               <li>Win-rate and lift benchmarks from 95+ live experiments across 30+ accounts (Convert.com / CXL industry ranges of 20&ndash;30% win rate).</li>
-              <li>Projections assume baseline traffic and average gift value hold constant.</li>
-              <li>Non-profit donation behavior varies from e-commerce; results depend on traffic quality, donor intent, and seasonality. Forecasts are estimates, not guarantees.</li>
+              <li>Projections assume baseline traffic and average order value hold constant.</li>
+              <li>Results vary by site type, traffic quality, and test velocity. Forecasts are estimates, not guarantees.</li>
             </ul>
           </div>
         </div>
       </div>
     </details>
+  </div>
+</section>
+
+<section class="range-compact" data-tab="combined">
+  <div class="wrap">
+    <p class="eyebrow">Combined Forecast</p>
+    <h2 class="section-title">SEO + UX Projected Revenue Increase</h2>
+    <p class="section-lede">Blend an SEO estimate with a UX estimate to see the combined projected revenue impact. Slide each budget to Low, Target, or High.</p>
+    <div class="range-wrap reveal">
+      <div class="cbnd-sliders">
+        <div class="cbnd-slider">
+          <div class="cbnd-slider-head"><span class="lbl">SEO Budget</span><span class="cbnd-val" id="cbnd-seo-val">Target</span></div>
+          <input type="range" id="cbnd-seo" class="budget-slider" min="0" max="2" step="1" value="1" aria-label="SEO budget estimate" />
+          <div class="cbnd-ticks"><span id="cbnd-seo-lo">Low</span><span id="cbnd-seo-tg" class="on">Target</span><span id="cbnd-seo-hi">High</span></div>
+        </div>
+        <div class="cbnd-slider">
+          <div class="cbnd-slider-head"><span class="lbl">UX Budget</span><span class="cbnd-val" id="cbnd-ux-val">Target</span></div>
+          <input type="range" id="cbnd-ux" class="budget-slider" min="0" max="2" step="1" value="1" aria-label="UX budget estimate" />
+          <div class="cbnd-ticks"><span id="cbnd-ux-lo">Low</span><span id="cbnd-ux-tg" class="on">Target</span><span id="cbnd-ux-hi">High</span></div>
+        </div>
+      </div>
+      <div class="range-figures two" style="margin-top:26px">
+        <div class="range-fig target"><div class="lbl">Avg Monthly Revenue Increase</div><div class="amt" id="cbnd-monthly">$0</div></div>
+        <div class="range-fig high"><div class="lbl">Yearly Revenue Increase</div><div class="amt" id="cbnd-yearly">$0</div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -572,23 +622,24 @@ const DEFAULT_DATA = {
 };
 
 const UX_DEFAULT_DATA = {
-  client: "Save the Children",
-  domain: "savethechildren.org",
-  monthlyVisitors: 500000,
-  reachPct: 0.08,
-  dcr: 0.025,
-  giftValue: 65,
-  monthlyRetainer: 20000,
+  client: "Save the Children Organization",
+  domain: "https://www.savethechildren.org/",
+  monthlySessions: 469733,
+  currentCR: 0.0135,
+  aov: 170.28,
+  monthlyRetainer: 16675,
   engagementMonths: 12,
   recommended: "expected",
   scenarios: {
-    conservative: { lift: 3, winRate: 20, tests: 18 },
-    expected:     { lift: 6, winRate: 25, tests: 24 },
-    aggressive:   { lift: 12, winRate: 30, tests: 30 }
+    conservative: { lift: 2, winRate: 20, tests: 48 },
+    expected:     { lift: 5, winRate: 25, tests: 48 },
+    aggressive:   { lift: 8, winRate: 30, tests: 48 }
   }
 };
-const STORAGE_KEY_UX = "obxUxForecastV1";
-let uxRaw, UXD;
+const STORAGE_KEY_UX3 = "obxUx3PagesV1";
+const UX_LABELS = { target:"Target Estimate", high:"High Estimate", low:"Low Estimate" };
+let uxRaw, UXD, uxActive = "target", uxData = {};
+const UX3_DEFAULT = null;
 const cap = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : s;
 
 const STORAGE_KEY = "obxSeoForecastV2";
@@ -786,7 +837,7 @@ function buildBudgetSection(){
   const cur=Number(DATA.current.revenue)||0;
   setTxt("b-budget", usd(bud));
   setTxt("b-target", plusUsd(tgt));
-  setTxt("b-leads", Math.round(DATA.ranked.leads||0).toLocaleString("en-US"));
+  setTxt("b-leads", "+" + Math.round(DATA.ranked.leads||0).toLocaleString("en-US"));
   setTxt("b-currev", usd(cur));
   setTxt("b-avgrev", usd(tgt + cur));
   setTxt("b-pctinc", "+" + pct1(cur>0 ? tgt/cur : 0));
@@ -1047,7 +1098,7 @@ function wireEditor(){
     toggle.textContent = open ? "✕ Close editor" : "✎ Edit data";
     if(open) editor.scrollIntoView({behavior:"smooth"});
   });
-  editor.addEventListener("input",()=>{ clearTimeout(debounceTimer); debounceTimer=setTimeout(()=>{ if(document.body.dataset.tab==="ux") applyUxFromEditor(); else applyFromEditor(); },250); });
+  editor.addEventListener("input",()=>{ clearTimeout(debounceTimer); debounceTimer=setTimeout(()=>{ const t=document.body.dataset.tab; if(t==="ux") applyUxFromEditor(); else if(t==="seo") applyFromEditor(); },250); });
   const slider=document.getElementById("budget-slider");
   if(slider) slider.addEventListener("input",e=>{
     const v=Number(e.target.value)||0;
@@ -1085,12 +1136,12 @@ function wireEditor(){
   });
   document.getElementById("ed-apply").addEventListener("click",()=>{ applyFromEditor(); status("Applied."); });
   document.getElementById("ed-link").addEventListener("click",()=>{
-    const enc="d="+b64enc(JSON.stringify({seo3:{active:seoActive,pages:seoData}, ux:uxRaw}));
+    const enc="d="+b64enc(JSON.stringify({seo3:{active:seoActive,pages:seoData}, ux3:{active:uxActive,pages:uxData}}));
     const url=location.origin+location.pathname+"#"+enc;
     navigator.clipboard.writeText(url).then(()=>status("Shareable link copied.")).catch(()=>{ location.hash=enc; status("Link set in address bar."); });
   });
   document.getElementById("ed-json").addEventListener("click",()=>{
-    const cfg=JSON.stringify({seo3:{active:seoActive,pages:seoData}, ux:uxRaw},null,2);
+    const cfg=JSON.stringify({seo3:{active:seoActive,pages:seoData}, ux3:{active:uxActive,pages:uxData}},null,2);
     navigator.clipboard.writeText(cfg).then(()=>status("Config JSON copied.")).catch(()=>status("Copy failed — see console."));
     try{ console.log(cfg); }catch(e){}
   });
@@ -1106,10 +1157,11 @@ function wireEditor(){
   document.getElementById("ed-reset").addEventListener("click",()=>{
     if(document.body.dataset.tab==="ux"){
       const sc=(uxRaw&&uxRaw.scenarios)||UX_DEFAULT_DATA.scenarios;
-      uxRaw={ client:"", domain:"", monthlyVisitors:"", reachPct:"", dcr:"", giftValue:"",
+      uxRaw={ client:"", domain:"", monthlySessions:"", currentCR:"", aov:"",
         monthlyRetainer:"", engagementMonths:"", recommended:(uxRaw&&uxRaw.recommended)||"expected",
         scenarios:JSON.parse(JSON.stringify(sc)) };
-      persistUx(uxRaw); buildUxEditor(uxRaw); renderUx(uxRaw); updateHeader("ux");
+      uxData[uxActive]=uxRaw; if(uxActive==="target") uxSyncSharedFromTarget();
+      persistUx3(); buildUxEditor(uxRaw); renderUx(uxRaw); updateHeader("ux");
       status("Cleared — test-scenario assumptions kept."); return;
     }
     const kw = currentRaw.keywords || DEFAULT_DATA.keywords, dk = DEFAULT_DATA.keywords;
@@ -1145,6 +1197,7 @@ async function downloadStandalone(){
     let out=src.replace(/const DEFAULT_DATA\s*=\s*\{[\s\S]*?\n\};/, "const DEFAULT_DATA = "+JSON.stringify(currentRaw,null,2)+";");
     out=out.replace(/const UX_DEFAULT_DATA\s*=\s*\{[\s\S]*?\n\};/, "const UX_DEFAULT_DATA = "+JSON.stringify(uxRaw,null,2)+";");
     out=out.replace(/const SEO3_DEFAULT = null;/, "const SEO3_DEFAULT = "+JSON.stringify({active:seoActive,pages:seoData})+";");
+    out=out.replace(/const UX3_DEFAULT = null;/, "const UX3_DEFAULT = "+JSON.stringify({active:uxActive,pages:uxData})+";");
     if(out===src) throw new Error("marker not found");
     dl(out, slug+"-forecast.html");
     status("Downloaded standalone HTML.");
@@ -1156,33 +1209,47 @@ async function downloadStandalone(){
 
 /* ===================== UX / CRO tab ===================== */
 function hashData(){ try{ const h=location.hash.slice(1); if(h.indexOf("d=")===0) return JSON.parse(b64dec(h.slice(2))); }catch(e){} return null; }
-function validUx(o){ return o && typeof o.monthlyVisitors!=="undefined" && o.scenarios; }
-function persistUx(raw){ try{ localStorage.setItem(STORAGE_KEY_UX, JSON.stringify(raw)); }catch(e){} }
-function loadUxInitial(){
+function validUx(o){ return o && typeof o.monthlySessions!=="undefined" && o.scenarios; }
+function validUx3(o){ return o && o.pages && validUx(o.pages.target) && validUx(o.pages.high) && validUx(o.pages.low); }
+function persistUx3(){ try{ localStorage.setItem(STORAGE_KEY_UX3, JSON.stringify({active:uxActive, pages:uxData})); }catch(e){} }
+function loadUx3Pages(){
   const h=hashData();
-  if(h && h.ux && validUx(h.ux)) return h.ux;
-  try{ const s=localStorage.getItem(STORAGE_KEY_UX); if(s){ const o=JSON.parse(s); if(validUx(o)) return o; } }catch(e){}
-  return JSON.parse(JSON.stringify(UX_DEFAULT_DATA));
+  if(h && h.ux3 && validUx3(h.ux3)) return h.ux3;
+  if(h && h.ux && validUx(h.ux)) return { active:"target", pages:{ target:h.ux, high:clone(h.ux), low:clone(h.ux) } };
+  try{ const st=localStorage.getItem(STORAGE_KEY_UX3); if(st){ const o=JSON.parse(st); if(validUx3(o)) return o; } }catch(e){}
+  if(UX3_DEFAULT && validUx3(UX3_DEFAULT)) return clone(UX3_DEFAULT);
+  return { active:"target", pages:{ target:clone(UX_DEFAULT_DATA), high:clone(UX_DEFAULT_DATA), low:clone(UX_DEFAULT_DATA) } };
 }
+function uxSyncSharedFromTarget(){
+  const t=uxData.target; if(!t) return;
+  ["high","low"].forEach(k=>{ const p=uxData[k]; if(!p) return;
+    p.monthlySessions=t.monthlySessions; p.currentCR=t.currentCR; p.aov=t.aov; });
+}
+function setUxPage(page){
+  if(!uxData[page]) return;
+  uxActive=page; uxRaw=uxData[uxActive];
+  document.querySelectorAll("[data-ux-page]").forEach(b=>b.classList.toggle("active", b.dataset.uxPage===page));
+  renderUx(uxRaw); buildUxEditor(uxRaw); updateHeader("ux"); persistUx3();
+  status(UX_LABELS[page]+" loaded.");
+}
+function wireUxPages(){ document.querySelectorAll("[data-ux-page]").forEach(b=> b.addEventListener("click",()=>setUxPage(b.dataset.uxPage)) ); }
 function computeUx(raw){
   const u=JSON.parse(JSON.stringify(raw));
-  const visitors=Number(u.monthlyVisitors)||0, reach=Number(u.reachPct)||0, dcr=Number(u.dcr)||0, gift=Number(u.giftValue)||0;
-  u.donationPageVisitors=visitors*reach;
-  u.monthlyDonors=u.donationPageVisitors*dcr;
-  u.monthlyIncome=u.monthlyDonors*gift;
-  u.annualIncome=u.monthlyIncome*12;
+  const sessions=Number(u.monthlySessions)||0, cr=Number(u.currentCR)||0, aov=Number(u.aov)||0;
+  u.monthlyConversions=sessions*cr;
+  u.monthlyRevenue=u.monthlyConversions*aov;
+  u.annualRevenue=u.monthlyRevenue*12;
   u.totalInvestment=(Number(u.monthlyRetainer)||0)*(Number(u.engagementMonths)||0);
   u.calc={};
   ["conservative","expected","aggressive"].forEach(k=>{
     const sc=u.scenarios[k]||{};
     const effLift=((Number(sc.lift)||0)/100)*((Number(sc.winRate)||0)/100);
     const comp=Math.pow(1+effLift, Number(sc.tests)||0);
-    const newDonors=u.monthlyDonors*comp, addDonors=newDonors-u.monthlyDonors;
-    const addMonthly=addDonors*gift, addAnnual=addMonthly*12;
-    u.calc[k]={ effLift, comp, projDCR:dcr*comp, relLift:comp-1, newDonors, addDonors, addMonthly, addAnnual,
-      mission: u.totalInvestment>0 ? addAnnual/u.totalInvestment : 0,
-      payback: addMonthly>0 ? u.totalInvestment/addMonthly : 0,
-      netFunds: addAnnual - u.totalInvestment };
+    const newMonthly=u.monthlyRevenue*comp, monthlyLift=newMonthly-u.monthlyRevenue, annualLift=monthlyLift*12;
+    u.calc[k]={ effLift, comp, projCR:cr*comp, relLift:comp-1, newMonthly, monthlyLift, annualLift,
+      roi: u.totalInvestment>0 ? annualLift/u.totalInvestment : 0,
+      payback: monthlyLift>0 ? u.totalInvestment/monthlyLift : 0,
+      netYear1: annualLift - u.totalInvestment };
   });
   u.recKey=u.recommended||"expected";
   u.rec=u.calc[u.recKey]||u.calc.expected;
@@ -1192,17 +1259,18 @@ function buildUxTable(){
   const cols=["conservative","expected","aggressive"], rec=UXD.recKey, C=UXD.calc, S=UXD.scenarios;
   const pct2=x=>(x*100).toFixed(2)+"%";
   const rows=[
-    ["Avg lift per winning test", k=>(S[k].lift||0)+"%"],
-    ["Win rate", k=>(S[k].winRate||0)+"%"],
+    ["Avg lift per winning test (%)", k=>(Number(S[k].lift)||0).toFixed(1)+"%"],
+    ["Win rate (%)", k=>(Number(S[k].winRate)||0).toFixed(1)+"%"],
     ["Tests per year", k=>String(S[k].tests||0)],
-    ["Projected donation CR", k=>pct2(C[k].projDCR)],
-    ["Relative DCR lift", k=>"+"+pct1(C[k].relLift)],
-    ["Additional monthly donors", k=>"+"+Math.round(C[k].addDonors).toLocaleString("en-US")],
-    ["Additional monthly funds", k=>plusUsd(C[k].addMonthly)],
-    ["Additional annual funds", k=>plusUsd(C[k].addAnnual)],
-    ["Mission impact multiplier", k=>C[k].mission.toFixed(1)+"\u00d7"],
-    ["Payback (months)", k=>C[k].payback>0?C[k].payback.toFixed(1):"\u2014"],
-    ["Net additional funds (after fee)", k=>plusUsd(C[k].netFunds)]
+    ["Effective lift per test", k=>(C[k].effLift*100).toFixed(2)+"%"],
+    ["Compounding factor", k=>C[k].comp.toFixed(2)+"\u00d7"],
+    ["Projected CR (%)", k=>(C[k].projCR*100).toFixed(2)+"%"],
+    ["Relative CR lift", k=>"+"+(C[k].relLift*100).toFixed(2)+"%"],
+    ["New monthly revenue", k=>usd(C[k].newMonthly)],
+    ["Monthly revenue lift", k=>plusUsd(C[k].monthlyLift)],
+    ["Annual revenue lift", k=>plusUsd(C[k].annualLift)],
+    ["ROI multiple", k=>C[k].roi.toFixed(2)+"\u00d7"],
+    ["Payback period (months)", k=>C[k].payback>0?C[k].payback.toFixed(2):"\u2014"]
   ];
   const tb=document.querySelector("#ux-table tbody");
   if(tb) tb.innerHTML=rows.map(r=>"<tr><td>"+r[0]+"</td>"+cols.map(k=>'<td class="'+(k===rec?"hl":"")+'">'+r[1](k)+"</td>").join("")+"</tr>").join("");
@@ -1211,12 +1279,12 @@ function buildUxTable(){
 function renderUx(raw){
   UXD=computeUx(raw);
   const r=UXD.rec;
-  setTxt("ux-annual", plusUsd(r.addAnnual));
-  setTxt("ux-mission", r.mission.toFixed(1)+"\u00d7");
-  setTxt("ux-payback", r.payback>0?r.payback.toFixed(1):"\u2014");
-  setTxt("ux-net", plusUsd(r.netFunds));
+  setTxt("ux-monthly", plusUsd(r.annualLift/12));
+  setTxt("ux-annual", plusUsd(r.annualLift));
+  setTxt("ux-roi", r.roi.toFixed(2)+"\u00d7");
+  setTxt("ux-payback", r.payback>0?r.payback.toFixed(2):"\u2014");
   setTxt("ux-scenario-note", cap(UXD.recKey)+" scenario");
-  setTxt("ux-lede", "Baseline: "+Math.round(UXD.monthlyDonors).toLocaleString("en-US")+" monthly donors and "+usd(UXD.monthlyIncome)+"/mo. Figures show the "+cap(UXD.recKey)+" scenario, compounded over "+((UXD.engagementMonths)||12)+" months of testing.");
+  setTxt("ux-lede", "Baseline: "+Math.round(UXD.monthlyConversions).toLocaleString("en-US")+" monthly conversions and "+usd(UXD.monthlyRevenue)+"/mo revenue. Figures show the "+cap(UXD.recKey)+" scenario, compounded over "+((UXD.engagementMonths)||12)+" months of testing.");
   buildUxTable();
   if(document.body.dataset.tab==="ux") updateHeader("ux");
 }
@@ -1224,10 +1292,9 @@ function buildUxEditor(u){
   const fields=[
     ["client","Client / organization","text",u.client],
     ["domain","Website","text",u.domain],
-    ["monthlyVisitors","Monthly visitors","number",u.monthlyVisitors],
-    ["reachPct","% reaching donation page","number",+((Number(u.reachPct)||0)*100).toFixed(4)],
-    ["dcr","Current donation CR (%)","number",+((Number(u.dcr)||0)*100).toFixed(4)],
-    ["giftValue","Average gift value ($)","number",u.giftValue],
+    ["monthlySessions","Monthly sessions","number",u.monthlySessions],
+    ["currentCR","Current conversion rate (%)","number",+((Number(u.currentCR)||0)*100).toFixed(4)],
+    ["aov","Average order value ($)","number",u.aov],
     ["monthlyRetainer","Monthly retainer ($)","number",u.monthlyRetainer],
     ["engagementMonths","Engagement length (months)","number",u.engagementMonths]
   ];
@@ -1247,16 +1314,48 @@ function readUxEditor(){
   const sc=(k,m)=>{const el=document.querySelector('[data-us="'+k+'"][data-um="'+m+'"]');return el?(parseFloat(el.value)||0):0;};
   const scen=k=>({lift:sc(k,"lift"),winRate:sc(k,"winRate"),tests:sc(k,"tests")});
   return { client:gv("client")||"Client", domain:gv("domain")||"",
-    monthlyVisitors:parseFloat(gv("monthlyVisitors"))||0,
-    reachPct:(parseFloat(gv("reachPct"))||0)/100,
-    dcr:(parseFloat(gv("dcr"))||0)/100,
-    giftValue:parseFloat(gv("giftValue"))||0,
+    monthlySessions:parseFloat(gv("monthlySessions"))||0,
+    currentCR:(parseFloat(gv("currentCR"))||0)/100,
+    aov:parseFloat(gv("aov"))||0,
     monthlyRetainer:parseFloat(gv("monthlyRetainer"))||0,
     engagementMonths:parseFloat(gv("engagementMonths"))||0,
     recommended:gv("recommended")||"expected",
     scenarios:{conservative:scen("conservative"),expected:scen("expected"),aggressive:scen("aggressive")} };
 }
-function applyUxFromEditor(){ uxRaw=readUxEditor(); renderUx(uxRaw); persistUx(uxRaw); }
+function applyUxFromEditor(){ uxRaw=readUxEditor(); uxData[uxActive]=uxRaw; if(uxActive==="target") uxSyncSharedFromTarget(); renderUx(uxRaw); persistUx3(); }
+function combinedFigures(){
+  const seoKeys=["low","target","high"], uxKeys=["low","target","high"];
+  const gp=id=>{ const el=document.getElementById(id); return Math.max(0,Math.min(2, Math.round(Number(el?el.value:1)||1))); };
+  const sp=gp("cbnd-seo"), up=gp("cbnd-ux");
+  const sKey=seoKeys[sp], uKey=uxKeys[up];
+  const D=computeDerived(seoData[sKey]||seoData.target||DEFAULT_DATA);
+  const seoAvgMonthly=((D.range&&D.range.target)||0)+(Number(D.current&&D.current.revenue)||0);
+  const U=computeUx(uxData[uKey]||uxData.target||UX_DEFAULT_DATA);
+  const uxAnnual=(U.rec&&U.rec.annualLift)||0;
+  return { sp, up,
+    seoBudget:Number((seoData[sKey]||{}).monthlyBudget)||0,
+    uxBudget:Number((uxData[uKey]||{}).monthlyRetainer)||0,
+    monthly: seoAvgMonthly + uxAnnual/12,
+    yearly: seoAvgMonthly*12 + uxAnnual };
+}
+function buildCombinedTicks(){
+  const posLbl=["Low","Target","High"], ids=["lo","tg","hi"], keys=["low","target","high"];
+  keys.forEach((k,i)=>{
+    setTxt("cbnd-seo-"+ids[i], posLbl[i]+" \u00b7 "+usd(Number((seoData[k]||{}).monthlyBudget)||0));
+    setTxt("cbnd-ux-"+ids[i], posLbl[i]+" \u00b7 "+usd(Number((uxData[k]||{}).monthlyRetainer)||0));
+  });
+}
+function renderCombined(){
+  buildCombinedTicks();
+  const f=combinedFigures(), posLbl=["Low","Target","High"], ids=["lo","tg","hi"];
+  setTxt("cbnd-seo-val", posLbl[f.sp]+" \u00b7 "+usd(f.seoBudget));
+  setTxt("cbnd-ux-val", posLbl[f.up]+" \u00b7 "+usd(f.uxBudget));
+  setTxt("cbnd-monthly", usd(f.monthly));
+  setTxt("cbnd-yearly", usd(f.yearly));
+  ids.forEach((t,i)=>{ const se=document.getElementById("cbnd-seo-"+t); if(se) se.classList.toggle("on", i===f.sp);
+    const ue=document.getElementById("cbnd-ux-"+t); if(ue) ue.classList.toggle("on", i===f.up); });
+}
+function wireCombined(){ ["cbnd-seo","cbnd-ux"].forEach(id=>{ const el=document.getElementById(id); if(el) el.addEventListener("input", renderCombined); }); }
 function updateHeader(tab){
   if(tab==="ux"){
     const u=UXD||uxRaw||UX_DEFAULT_DATA;
@@ -1264,6 +1363,12 @@ function updateHeader(tab){
     setTxt("h-window", (UXD?UXD.engagementMonths:(uxRaw&&uxRaw.engagementMonths))||12);
     setTxt("hero-eyebrow","Prepared for "+(u.domain||""));
     setTxt("mast-meta","UX / CRO Forecast");
+  } else if(tab==="combined"){
+    const d=(typeof seoData!=="undefined" && seoData.target)||currentRaw||DEFAULT_DATA;
+    setTxt("h-client", d.client||"Client"); setTxt("h-disc","Combined");
+    setTxt("h-window", ((d.months||[]).length)||12);
+    setTxt("hero-eyebrow","Prepared for "+(d.domain||""));
+    setTxt("mast-meta","Combined Forecast");
   } else {
     const d=DATA||currentRaw||DEFAULT_DATA;
     setTxt("h-client", d.client||"Client"); setTxt("h-disc","SEO");
@@ -1275,7 +1380,7 @@ function updateHeader(tab){
 function setTab(tab){
   document.body.dataset.tab=tab;
   document.querySelectorAll("[data-tab-btn]").forEach(b=>b.classList.toggle("active", b.dataset.tabBtn===tab));
-  if(tab==="ux") renderUx(uxRaw); else render(currentRaw);
+  if(tab==="ux") renderUx(uxRaw); else if(tab==="combined") renderCombined(); else render(currentRaw);
   updateHeader(tab);
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -1286,7 +1391,10 @@ const _seo = loadSeoPages();
 seoData = _seo.pages; seoActive = _seo.active || "target";
 currentRaw = seoData[seoActive];
 syncSharedFromTarget();
-uxRaw = loadUxInitial();
+const _ux = loadUx3Pages();
+uxData = _ux.pages; uxActive = _ux.active || "target";
+uxRaw = uxData[uxActive];
+uxSyncSharedFromTarget();
 render(currentRaw);
 initReveal();
 buildEditor(currentRaw);
@@ -1297,7 +1405,11 @@ buildUxEditor(uxRaw);
 renderUx(uxRaw);
 wireTabs();
 wireSeoPages();
+wireUxPages();
 document.querySelectorAll("[data-seo-page]").forEach(b=>b.classList.toggle("active", b.dataset.seoPage===seoActive));
+document.querySelectorAll("[data-ux-page]").forEach(b=>b.classList.toggle("active", b.dataset.uxPage===uxActive));
+wireCombined();
+renderCombined();
 updateHeader(document.body.dataset.tab||"seo");
 </script>
 </body>
