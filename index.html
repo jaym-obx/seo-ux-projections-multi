@@ -461,9 +461,9 @@
           <div>
             <h3>The model</h3>
             <ul class="assump">
-              <li><b>Effective lift per test</b> = average lift of a winning test &times; win rate.</li>
-              <li><b>Compounding factor</b> = (1 + effective lift) raised to the number of tests per year.</li>
-              <li><b>Projected CR</b> = current rate &times; compounding factor; monthly revenue scales the same way.</li>
+              <li><b>Winning tests</b> = win rate &times; tests per year.</li>
+              <li><b>Effective lift per test</b> = average lift of a winning test &times; the realization factor (a measured-to-realized discount).</li>
+              <li><b>Projected CR</b> = current rate &times; (1 + effective lift) ^ winning tests; monthly revenue scales the same way.</li>
               <li><b>ROI multiple</b> = annual revenue lift &divide; total UX investment; <b>payback</b> = investment &divide; monthly revenue lift.</li>
             </ul>
           </div>
@@ -570,7 +570,7 @@
       <div class="ed-grid" id="ux-fields"></div>
       <h3 class="ed-h3">Test scenarios</h3>
       <div class="ed-keys" id="ux-scenarios"></div>
-      <p class="ed-note">Effective lift per test = avg lift &times; win rate. Compounding factor = (1 + effective lift) ^ tests per year, applied to your current donation conversion rate.</p>
+      <p class="ed-note">Winning tests = win rate &times; tests per year. Effective lift = avg lift &times; realization factor. Projected CR = current CR &times; (1 + effective lift) ^ winning tests.</p>
     </div>
 
     <div class="ed-actions">
@@ -624,11 +624,12 @@ const DEFAULT_DATA = {
 const UX_DEFAULT_DATA = {
   client: "Save the Children Organization",
   domain: "https://www.savethechildren.org/",
-  monthlySessions: 469733,
-  currentCR: 0.0135,
-  aov: 170.28,
-  monthlyRetainer: 16675,
+  monthlySessions: 641948,
+  currentCR: 0.0185,
+  aov: 132.87,
+  monthlyRetainer: 200000,
   engagementMonths: 12,
+  realizationFactor: 0.6,
   recommended: "expected",
   scenarios: {
     conservative: { lift: 2, winRate: 20, tests: 48 },
@@ -1158,7 +1159,7 @@ function wireEditor(){
     if(document.body.dataset.tab==="ux"){
       const sc=(uxRaw&&uxRaw.scenarios)||UX_DEFAULT_DATA.scenarios;
       uxRaw={ client:"", domain:"", monthlySessions:"", currentCR:"", aov:"",
-        monthlyRetainer:"", engagementMonths:"", recommended:(uxRaw&&uxRaw.recommended)||"expected",
+        monthlyRetainer:"", engagementMonths:"", realizationFactor:(uxRaw&&isFinite(Number(uxRaw.realizationFactor)))?Number(uxRaw.realizationFactor):0.6, recommended:(uxRaw&&uxRaw.recommended)||"expected",
         scenarios:JSON.parse(JSON.stringify(sc)) };
       uxData[uxActive]=uxRaw; if(uxActive==="target") uxSyncSharedFromTarget();
       persistUx3(); buildUxEditor(uxRaw); renderUx(uxRaw); updateHeader("ux");
@@ -1240,13 +1241,17 @@ function computeUx(raw){
   u.monthlyRevenue=u.monthlyConversions*aov;
   u.annualRevenue=u.monthlyRevenue*12;
   u.totalInvestment=(Number(u.monthlyRetainer)||0)*(Number(u.engagementMonths)||0);
+  const rf=isFinite(Number(u.realizationFactor))?Number(u.realizationFactor):0.6;
+  u.realizationFactor=rf;
   u.calc={};
   ["conservative","expected","aggressive"].forEach(k=>{
     const sc=u.scenarios[k]||{};
-    const effLift=((Number(sc.lift)||0)/100)*((Number(sc.winRate)||0)/100);
-    const comp=Math.pow(1+effLift, Number(sc.tests)||0);
+    const lift=(Number(sc.lift)||0)/100, win=(Number(sc.winRate)||0)/100, tests=Number(sc.tests)||0;
+    const winningTests=win*tests;
+    const effLift=lift*rf;
+    const comp=Math.pow(1+effLift, winningTests);
     const newMonthly=u.monthlyRevenue*comp, monthlyLift=newMonthly-u.monthlyRevenue, annualLift=monthlyLift*12;
-    u.calc[k]={ effLift, comp, projCR:cr*comp, relLift:comp-1, newMonthly, monthlyLift, annualLift,
+    u.calc[k]={ winningTests, effLift, comp, projCR:cr*comp, newMonthly, monthlyLift, annualLift,
       roi: u.totalInvestment>0 ? annualLift/u.totalInvestment : 0,
       payback: monthlyLift>0 ? u.totalInvestment/monthlyLift : 0,
       netYear1: annualLift - u.totalInvestment };
@@ -1258,14 +1263,13 @@ function computeUx(raw){
 function buildUxTable(){
   const cols=["conservative","expected","aggressive"], rec=UXD.recKey, C=UXD.calc, S=UXD.scenarios;
   const pct2=x=>(x*100).toFixed(2)+"%";
+  const fmtWT=x=>{ const v=Math.round(x*10)/10; return Number.isInteger(v)?String(v):v.toFixed(1); };
   const rows=[
     ["Avg lift per winning test (%)", k=>(Number(S[k].lift)||0).toFixed(1)+"%"],
     ["Win rate (%)", k=>(Number(S[k].winRate)||0).toFixed(1)+"%"],
     ["Tests per year", k=>String(S[k].tests||0)],
-    ["Effective lift per test", k=>(C[k].effLift*100).toFixed(2)+"%"],
-    ["Compounding factor", k=>C[k].comp.toFixed(2)+"\u00d7"],
+    ["Winning tests", k=>fmtWT(C[k].winningTests)],
     ["Projected CR (%)", k=>(C[k].projCR*100).toFixed(2)+"%"],
-    ["Relative CR lift", k=>"+"+(C[k].relLift*100).toFixed(2)+"%"],
     ["New monthly revenue", k=>usd(C[k].newMonthly)],
     ["Monthly revenue lift", k=>plusUsd(C[k].monthlyLift)],
     ["Annual revenue lift", k=>plusUsd(C[k].annualLift)],
@@ -1296,7 +1300,8 @@ function buildUxEditor(u){
     ["currentCR","Current conversion rate (%)","number",+((Number(u.currentCR)||0)*100).toFixed(4)],
     ["aov","Average order value ($)","number",u.aov],
     ["monthlyRetainer","Monthly retainer ($)","number",u.monthlyRetainer],
-    ["engagementMonths","Engagement length (months)","number",u.engagementMonths]
+    ["engagementMonths","Engagement length (months)","number",u.engagementMonths],
+    ["realizationFactor","Realization factor (0\u20131)","number",(isFinite(Number(u.realizationFactor))?Number(u.realizationFactor):0.6)]
   ];
   let html=fields.map(f=>'<div class="ed-field"><label>'+f[1]+'<input data-uk="'+f[0]+'" type="'+f[2]+'" value="'+f[3]+'"></label></div>').join("");
   const rec=u.recommended||"expected";
@@ -1319,6 +1324,7 @@ function readUxEditor(){
     aov:parseFloat(gv("aov"))||0,
     monthlyRetainer:parseFloat(gv("monthlyRetainer"))||0,
     engagementMonths:parseFloat(gv("engagementMonths"))||0,
+    realizationFactor:(function(){const v=parseFloat(gv("realizationFactor"));return isFinite(v)?v:0.6;})(),
     recommended:gv("recommended")||"expected",
     scenarios:{conservative:scen("conservative"),expected:scen("expected"),aggressive:scen("aggressive")} };
 }
@@ -1334,7 +1340,7 @@ function combinedFigures(){
   const uxAnnual=(U.rec&&U.rec.annualLift)||0;
   return { sp, up,
     seoBudget:Number((seoData[sKey]||{}).monthlyBudget)||0,
-    uxBudget:Number((uxData[uKey]||{}).monthlyRetainer)||0,
+    uxBudget:Number((seoData[uKey]||{}).monthlyBudget)||0,
     monthly: seoAvgMonthly + uxAnnual/12,
     yearly: seoAvgMonthly*12 + uxAnnual };
 }
@@ -1342,7 +1348,7 @@ function buildCombinedTicks(){
   const posLbl=["Low","Target","High"], ids=["lo","tg","hi"], keys=["low","target","high"];
   keys.forEach((k,i)=>{
     setTxt("cbnd-seo-"+ids[i], posLbl[i]+" \u00b7 "+usd(Number((seoData[k]||{}).monthlyBudget)||0));
-    setTxt("cbnd-ux-"+ids[i], posLbl[i]+" \u00b7 "+usd(Number((uxData[k]||{}).monthlyRetainer)||0));
+    setTxt("cbnd-ux-"+ids[i], posLbl[i]+" \u00b7 "+usd(Number((seoData[k]||{}).monthlyBudget)||0));
   });
 }
 function renderCombined(){
