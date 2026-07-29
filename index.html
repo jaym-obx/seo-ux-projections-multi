@@ -424,11 +424,17 @@
     <h2 class="section-title">Projected Lift</h2>
     <p class="section-lede" id="ux-lede">Recommended scenario, compounded across a 12-month testing program.</p>
     <div class="range-wrap reveal">
-      <div class="range-figures four">
+      <div class="range-figures three">
+        <div class="range-fig target"><div class="lbl">Monthly Budget</div><div class="amt" id="ux-budget">$0</div><div class="note">Retainer &divide; 12</div></div>
         <div class="range-fig target"><div class="lbl">Projected Monthly Lift</div><div class="amt" id="ux-monthly">+$0</div><div class="note">Annual lift &divide; 12</div></div>
-        <div class="range-fig target"><div class="lbl">Projected Annual Lift</div><div class="amt" id="ux-annual">+$0</div><div class="note" id="ux-scenario-note">Expected scenario</div></div>
-        <div class="range-fig high"><div class="lbl">ROI Multiple</div><div class="amt" id="ux-roi">0&times;</div><div class="note">Annual lift &divide; investment</div></div>
-        <div class="range-fig low"><div class="lbl">Payback Period</div><div class="amt" id="ux-payback">0</div><div class="note">months</div></div>
+        <div class="range-fig high"><div class="lbl">Projected Annual Lift</div><div class="amt" id="ux-annual">+$0</div><div class="note" id="ux-scenario-note">Expected scenario</div></div>
+      </div>
+    </div>
+    <div class="range-wrap reveal" style="margin-top:18px">
+      <div class="range-figures three">
+        <div class="range-fig low"><div class="lbl">Projected Conversion Rate</div><div class="amt" id="ux-cr">0%</div></div>
+        <div class="range-fig target"><div class="lbl">ROI Multiple</div><div class="amt" id="ux-roi">0&times;</div><div class="note">Annual lift &divide; investment</div></div>
+        <div class="range-fig high"><div class="lbl">Payback Period</div><div class="amt" id="ux-payback">0</div><div class="note">months</div></div>
       </div>
     </div>
   </div>
@@ -1283,7 +1289,9 @@ function buildUxTable(){
 function renderUx(raw){
   UXD=computeUx(raw);
   const r=UXD.rec;
+  setTxt("ux-budget", usd((Number(UXD.monthlyRetainer)||0)/12));
   setTxt("ux-monthly", plusUsd(r.annualLift/12));
+  setTxt("ux-cr", ((r.projCR||0)*100).toFixed(2)+"%");
   setTxt("ux-annual", plusUsd(r.annualLift));
   setTxt("ux-roi", r.roi.toFixed(2)+"\u00d7");
   setTxt("ux-payback", r.payback>0?r.payback.toFixed(2):"\u2014");
